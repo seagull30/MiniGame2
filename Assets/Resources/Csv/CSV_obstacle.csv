@@ -1,0 +1,9 @@
+ID,Name,Object_Image,Move_Speed,Spawn_Min_Score,Spawn_Max_Score,Loop,Effect_Sound,Effect_Sound_Loop,Cool_Time
+1,새,bird,3,5,4000,FALSE,bird_sound,FALSE,0
+2,구름,cloud,2,2500,7000,FALSE,cloud_sound,FALSE,0
+3,제트기류,jet,10,6000,10000,TRUE,jet_sound,TRUE,3
+4,비행기,airplane,6,8000,12000,FALSE,airplane_sound,FALSE,0
+5,유성,meteor,6,12000,30000,FALSE,meteor_sound,FALSE,0
+6,인공위성,satellite,8,30000,60000,FALSE,satellite_sound,FALSE,0
+7,우주쓰레기,spacejunk,5,25000,1000000,FALSE,spacejunk_sound,FALSE,0
+8,소행성잔해,asteroid,9,40000,1000000,FALSE,asteroid_sound,FALSE,0
