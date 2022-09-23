@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using UnityEngine;
+using UnityEditor;
 
 public class CsvObject
 {
@@ -104,6 +105,7 @@ public class SaveUser
 
 public class DataManager : MonoBehaviour
 {
+
     public SaveDataObject saveObject = new SaveDataObject();
     public SaveDataBackGround saveBackGround = new SaveDataBackGround();
     public SaveDataAchievement saveAchievement = new SaveDataAchievement();
@@ -158,7 +160,24 @@ public class DataManager : MonoBehaviour
             using (CsvReader csv = new CsvReader(csvString, config))
             {
 
-                if(classIndex == 1)
+                //유저 정보 저장
+                saveUser.UserName = "User";
+                //임시 데이터 저장
+                saveUser.UserScore.Add(1000);
+                saveUser.UserScore.Add(2000);
+                saveUser.UserScore.Add(3000);
+                saveUser.UserScore.Add(4000);
+
+                saveUser.UserScoreDate.Add("asdasd");
+                saveUser.UserScoreDate.Add("asdasd");
+                saveUser.UserScoreDate.Add("asdasd");
+                saveUser.UserScoreDate.Add("asdasd");
+
+
+                string jsonUser = JsonUtility.ToJson(saveUser);//제이슨화
+                File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
+
+                if (classIndex == 1)
                 {
                     //파싱한 데이터를 class 의 필드로 적용시켜줌
                     //코르틴에 넣을수 있음
@@ -177,7 +196,27 @@ public class DataManager : MonoBehaviour
                         saveObject.Effect_Sound_Loop.Add(record.Effect_Sound_Loop);
                         saveObject.Cool_Time.Add(record.Cool_Time);
 
+                        ObjectItem scObject = ScriptableObject.CreateInstance<ObjectItem>();
+                        scObject.id = record.ID;
+                        scObject.itemName = record.Name;
+                        
+                        //이미지 스프라이트 설정
+                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.jpg", typeof(Sprite));
+                        scObject.itemImage = objSprite; //sprite
+                        
+                        //프리팹 설정
+                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Object{record.ID}.prefab", typeof(GameObject));
+                        scObject.itemPrefab = objPrefab;
+                        
+                        scObject.moveSpeed = record.Move_Speed;
+                        scObject.minScore = record.Spawn_Min_Score;
+                        scObject.maxScore = record.Spawn_Max_Score;
+                        scObject.loop = record.Loop;
+                        //scObject.effectSound = record.Effect_Sound;
+                        scObject.effectSoundLoop = record.Effect_Sound_Loop;
+                        scObject.coolTime = record.Cool_Time;
 
+                        AssetDatabase.CreateAsset(scObject, $"Assets/ScriptableData/Object/Object{record.ID}.asset");
                     }
 
                     string json = JsonUtility.ToJson(saveObject);//제이슨화
@@ -202,6 +241,28 @@ public class DataManager : MonoBehaviour
                         saveBackGround.Map_Change_Effect_Time.Add(record.Map_Change_Effect_Time);
                         saveBackGround.Bonus.Add(record.Bonus);
 
+
+                        BackGroundItem scBackGround = ScriptableObject.CreateInstance<BackGroundItem>();
+                        scBackGround.id = record.ID;
+                        scBackGround.itemName = record.Name;
+
+                        //이미지 스프라이트 설정
+                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Background{record.ID}.jpg", typeof(Sprite));
+                        scBackGround.itemImage = objSprite; //sprite
+
+                        //프리팹 설정
+                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Background{record.ID}.prefab", typeof(GameObject));
+                        scBackGround.itemPrefab = objPrefab;
+
+                        scBackGround.minScore = record.Map_Change_Min_Score;
+                        scBackGround.maxScore = record.Map_Change_Max_Score;
+                        //scBackGround.BGM = record.BGM;
+
+                        scBackGround.mapChangeEffect = record.Map_Change_Effect;
+                        scBackGround.mapChangeEffectTime = record.Map_Change_Effect_Time;
+                        scBackGround.bonus = record.Bonus;
+
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/ScriptableData/Background/Background{record.ID}.asset");
                     }
                     string json = JsonUtility.ToJson(saveBackGround);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND, json);
@@ -220,6 +281,21 @@ public class DataManager : MonoBehaviour
                         saveAchievement.Conditional_Type.Add(record.Conditional_Type);
                         saveAchievement.Conditional.Add(record.Conditional);
                         saveAchievement.Completion.Add(record.Completion);
+
+                        AchieveItem scBackGround = ScriptableObject.CreateInstance<AchieveItem>();
+                        scBackGround.id = record.ID;
+                        scBackGround.itemName = record.Name;
+
+                        //이미지 스프라이트 설정
+                        //프리팹 설정
+                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Achievement{record.ID}.prefab", typeof(GameObject));
+                        scBackGround.itemPrefab = objPrefab;
+
+                        scBackGround.conditinalType = record.Conditional_Type;
+                        scBackGround.conditinal = record.Conditional;
+                        scBackGround.completion = record.Completion;
+
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/ScriptableData/Achievement/Achievement{record.ID}.asset");
 
                     }
 
