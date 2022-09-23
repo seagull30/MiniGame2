@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
@@ -24,15 +26,26 @@ public class PlayerControl : MonoBehaviour
 
     private bool _isMove = false;
     private Slider _overloadBar;
+    private Image _overloadBarColor;
 
     private float _elapsedTime;
+    private int points;
 
     private bool _isOverload = false;
     private bool _isCoroutineRunning = false;
-    bool _isContinuousTouch = false;
+    private bool _isContinuousTouch = false;
 
+    public UnityAction<float> playerOnCiling;
+
+    private static readonly Color32[] colors =
+    {
+        new Color32(0,255,24,255),
+        new Color32(241,139,26,255),
+        new Color32(226,34,30, 255),
+    };
 
     private bool _isCeiling = false;
+    private bool _isDead;
 
     private void Awake()
     {
@@ -40,8 +53,10 @@ public class PlayerControl : MonoBehaviour
         _overloadBar = GetComponentInChildren<Slider>();
         _overloadBar.maxValue = _maxOverloadLevel;
         _overloadBar.value = 0f;
-
+        _overloadBarColor = _overloadBar.transform.Find("Fill Area").GetComponentInChildren<Image>();
+        StartCoroutine(getScore());
     }
+
     private void Update()
     {
         checkInput();
@@ -50,8 +65,9 @@ public class PlayerControl : MonoBehaviour
         else
         {
             move();
-            refueling();
+            falling();
         }
+        updateScore();
     }
 
     private void checkInput()
@@ -75,7 +91,6 @@ public class PlayerControl : MonoBehaviour
                     }
                 }
                 _elapsedTime = 0f;
-                StopAllCoroutines();
                 _isCoroutineRunning = false;
             }
             _isMove = true;
@@ -93,7 +108,6 @@ public class PlayerControl : MonoBehaviour
                     _isContinuousTouch = false;
                 }
                 _elapsedTime = 0f;
-                StopAllCoroutines();
                 _isCoroutineRunning = false;
             }
             _isMove = false;
@@ -107,17 +121,18 @@ public class PlayerControl : MonoBehaviour
 
         _elapsedTime += Time.deltaTime;
 
+        _moveDistance = _moveSpeed * Time.deltaTime;
+
         if (!_isCeiling)
         {
-            _moveDistance = _moveSpeed * Time.deltaTime;
             transform.position += new Vector3(0f, _moveDistance, 0f);
+
+            //_rigidbody.MovePosition(transform.position + new Vector3(0f, _moveDistance, 0f));
         }
         else
         {
-
+            playerOnCiling.Invoke(_moveDistance);
         }
-
-        //_rigidbody.AddForce(new Vector2(0f, moveSpeed));
 
         if (!_isCoroutineRunning && _elapsedTime > 2f)
         {
@@ -125,13 +140,18 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void refueling()
+    private void falling()
     {
         if (_isMove)
             return;
         _elapsedTime += Time.deltaTime;
 
         _moveDistance = -(_fallingSpeed * Time.deltaTime);
+
+        transform.position += new Vector3(0f, _moveDistance, 0f);
+
+        //_rigidbody.MovePosition(transform.position + new Vector3(0f, _moveDistance, 0f));
+
 
         transform.position += new Vector3(0f, _moveDistance, 0f);
 
@@ -159,7 +179,8 @@ public class PlayerControl : MonoBehaviour
         _isCoroutineRunning = true;
         while (true)
         {
-
+            if (!_isCoroutineRunning)
+                yield break;
             _overloadBar.value += amounToChange;
             if (_overloadBar.value >= _maxOverloadLevel)
             {
@@ -176,15 +197,41 @@ public class PlayerControl : MonoBehaviour
                 _isCoroutineRunning = false;
                 break;
             }
+            if (_overloadBar.value <= 40)
+            {
+                _overloadBarColor.color = colors[0];
+            }
+            else if (_overloadBar.value <= 80)
+            {
+                _overloadBarColor.color = colors[1];
+
+            }
+            else
+            {
+                _overloadBarColor.color = colors[2];
+
+            }
             yield return new WaitForSeconds(0.5f);
-
-
         }
     }
 
-    private void restart()
+    IEnumerator getScore()
     {
+        while (true)
+        {
+            if (_isDead)
+                yield break;
+            if (_isMove)
+                points = (Mathf.FloorToInt(_elapsedTime)) + 1;
+            else
+                points = 1;
 
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    private void updateScore()
+    {
+        GameManager.Instance.addScore(points);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -198,6 +245,7 @@ public class PlayerControl : MonoBehaviour
         {
             _isCeiling = true;
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
