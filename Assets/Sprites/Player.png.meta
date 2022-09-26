@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -164,8 +164,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcb5095eb9874d54dadf21262c8ff3eb
-      internalID: 1903934585
+      spriteID: 33e4a3a68926bc147bae36735e4e5ff9
+      internalID: 282024193
       vertices: []
       indices: 
       edges: []
@@ -185,8 +185,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9cf1ef43a876084abab00f666426f6e
-      internalID: -1726307548
+      spriteID: 8fba0a1247ef29548bc1acd515bcdf59
+      internalID: -941208539
       vertices: []
       indices: 
       edges: []
@@ -206,8 +206,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2b2208dcf71f8d4eaa954dccbd1313d
-      internalID: 1087681824
+      spriteID: 8e53f9c1c58986844957e74d3f1f69c6
+      internalID: -32401117
       vertices: []
       indices: 
       edges: []
@@ -227,8 +227,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaa614c3fbc4ff840b756e0e2c77a2f0
-      internalID: 598095203
+      spriteID: c32cc071e27c9fa47854a04093caaa8f
+      internalID: 1491281824
       vertices: []
       indices: 
       edges: []
@@ -248,8 +248,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4c005021f417524d854c8de412a6bd2
-      internalID: 889123424
+      spriteID: c0b2d5f4a7791a04f81ff6919ab7d5d7
+      internalID: 839332228
       vertices: []
       indices: 
       edges: []
@@ -269,8 +269,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bf26efb3a72647478937d8aa27b81dc
-      internalID: -22810048
+      spriteID: f81764e74b71aa941952c9551f9ef2b4
+      internalID: -900991581
       vertices: []
       indices: 
       edges: []
@@ -286,13 +286,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_2: -1726307548
-      Player_4: 598095203
-      Player_6: -22810048
-      Player_1: 1903934585
+      Player_2: -941208539
+      Player_4: 1491281824
+      Player_6: -900991581
+      Player_1: 282024193
       Player_0: 916676739
-      Player_3: 1087681824
-      Player_5: 889123424
+      Player_3: -32401117
+      Player_5: 839332228
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
