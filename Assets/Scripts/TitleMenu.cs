@@ -89,7 +89,7 @@ public class TitleMenu : MonoBehaviour
 
     public void CallGame()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main2");
     }
 
 }

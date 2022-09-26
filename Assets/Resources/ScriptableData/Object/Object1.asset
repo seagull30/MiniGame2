@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: Object1
   m_EditorClassIdentifier: 
   id: 1
-  itemName: "\uC0C8"
-  itemImage: {fileID: 0}
-  itemPrefab: {fileID: 0}
+  itemName: LeftBird
+  itemImage: {fileID: 887751400, guid: aafc4e4806ccfe3438c1c54b8a2e81d8, type: 3}
+  itemPrefab: {fileID: 1844354163064083972, guid: 924c235588873294e81e2bbbae4103fe, type: 3}
   moveSpeed: 3
   minScore: 5
   maxScore: 4000
-  loop: 0
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  coolTime: 0
+  minXValue: 1
+  maxXValue: 1
+  minYValue: 1
+  maxYValue: 1150
+  maxSpawn: 0
+  minSpawnTime: 1
+  maxSpawnTime: 2

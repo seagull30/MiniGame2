@@ -13,14 +13,19 @@ public class CsvObject
 
     public int ID { get; set; }
     public string Name { get; set; }
-    public string Object_Image {get; set;}
+    public string Object_Image { get; set; }
     public int Move_Speed { get; set; }
     public int Spawn_Min_Score { get; set; }
     public int Spawn_Max_Score { get; set; }
-    public bool Loop { get; set; }
-    public string Effect_Sound { get; set; }
+    public int Effect_Sound { get; set; }
     public bool Effect_Sound_Loop { get; set; }
-    public int Cool_Time { get; set; }
+    public int Min_X_Value { get; set; }
+    public int Max_X_Value { get; set; }
+    public int Min_Y_Value { get; set; }
+    public int Max_Y_Value { get; set; }
+    public int Max_Spawn { get; set; }
+    public int Min_Spawn_Time { get; set; }
+    public int Max_Spawn_Time { get; set; }
 
 }
 
@@ -58,10 +63,15 @@ public class SaveDataObject
     public List<int> Move_Speed = new List<int>();
     public List<int> Spawn_Min_Score = new List<int>();
     public List<int> Spawn_Max_Score = new List<int>();
-    public List<bool> Loop = new List<bool>();
-    public List<string> Effect_Sound = new List<string>();
+    public List<int> Effect_Sound = new List<int>();
     public List<bool> Effect_Sound_Loop = new List<bool>();
-    public List<int> Cool_Time = new List<int>();
+    public List<int> Min_X_Value = new List<int>();
+    public List<int> Max_X_Value = new List<int>();
+    public List<int> Min_Y_Value = new List<int>();
+    public List<int> Max_Y_Value = new List<int>();
+    public List<int> Max_Spawn = new List<int>();
+    public List<int> Min_Spawn_Time = new List<int>();
+    public List<int> Max_Spawn_Time = new List<int>();
 }
 
 [SerializeField]
@@ -212,30 +222,47 @@ public class DataManager : MonoBehaviour
                         saveObject.Move_Speed.Add(record.Move_Speed);
                         saveObject.Spawn_Min_Score.Add(record.Spawn_Min_Score);
                         saveObject.Spawn_Max_Score.Add(record.Spawn_Max_Score);
-                        saveObject.Loop.Add(record.Loop);
                         saveObject.Effect_Sound.Add(record.Effect_Sound);
                         saveObject.Effect_Sound_Loop.Add(record.Effect_Sound_Loop);
-                        saveObject.Cool_Time.Add(record.Cool_Time);
+                        saveObject.Min_X_Value.Add(record.Min_X_Value);
+                        saveObject.Max_X_Value.Add(record.Max_X_Value);
+                        saveObject.Min_Y_Value.Add(record.Min_Y_Value);
+                        saveObject.Max_Y_Value.Add(record.Max_Y_Value);
+                        saveObject.Max_Spawn.Add(record.Max_Spawn);
+                        saveObject.Min_Spawn_Time.Add(record.Min_Spawn_Time);
+                        saveObject.Max_Spawn_Time.Add(record.Max_Spawn_Time);
 
                         ObjectItem scObject = ScriptableObject.CreateInstance<ObjectItem>();
                         scObject.id = record.ID;
                         scObject.itemName = record.Name;
                         
                         //이미지 스프라이트 설정
-                       // Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.jpg", typeof(Sprite));
-                        //scObject.itemImage = objSprite; //sprite
+                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.png", typeof(Sprite));
+                        scObject.itemImage = objSprite; //sprite
                         
                         //프리팹 설정
-                        //GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Object{record.ID}.prefab", typeof(GameObject));
-                        //scObject.itemPrefab = objPrefab;
+                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs2/Object{record.ID}.prefab", typeof(GameObject));
+                        scObject.itemPrefab = objPrefab;
                         
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
                         scObject.maxScore = record.Spawn_Max_Score;
-                        scObject.loop = record.Loop;
-                        //scObject.effectSound = record.Effect_Sound;
+                        
+/*                        if (record.Effect_Sound == 1)
+                        {
+                            AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
+
+                            scObject.effectSound = objEffectSound;
+                        }*/
+
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
-                        scObject.coolTime = record.Cool_Time;
+                        scObject.minXValue = record.Min_X_Value;
+                        scObject.maxXValue = record.Max_X_Value;
+                        scObject.minYValue = record.Min_Y_Value;
+                        scObject.maxYValue = record.Max_Y_Value;
+                        scObject.maxSpawn = record.Max_Spawn;
+                        scObject.minSpawnTime = record.Min_Spawn_Time;
+                        scObject.maxSpawnTime = record.Max_Spawn_Time;
 
                         AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/Object{record.ID}.asset");
                     }

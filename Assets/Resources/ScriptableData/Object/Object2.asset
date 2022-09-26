@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: Object2
   m_EditorClassIdentifier: 
   id: 2
-  itemName: "\uAD6C\uB984"
-  itemImage: {fileID: 0}
-  itemPrefab: {fileID: 0}
-  moveSpeed: 2
-  minScore: 2500
-  maxScore: 7000
-  loop: 0
+  itemName: RightBird
+  itemImage: {fileID: -1677158514, guid: 59516ddca1193c94bbe9954e297d3456, type: 3}
+  itemPrefab: {fileID: 3264152148722010609, guid: 3c30f71bef681b94baa5b3b17ec6db3d, type: 3}
+  moveSpeed: 3
+  minScore: 5
+  maxScore: 4000
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  coolTime: 0
+  minXValue: 1080
+  maxXValue: 1080
+  minYValue: 1
+  maxYValue: 1150
+  maxSpawn: 0
+  minSpawnTime: 1
+  maxSpawnTime: 2
