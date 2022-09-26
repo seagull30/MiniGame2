@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 104
   itemName: "\uC5F4\uAD8C"
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: f0874a646b5bf0e44878a085bb24650c, type: 3}
   minScore: 30001
   maxScore: 60000
   BGM: {fileID: 0}
-  mapChangeEffect: {fileID: 21300000, guid: f443e2f44ce3ea24fb0c3213a4c571fa, type: 3}
+  mapChangeEffect: {fileID: 21300000, guid: 8b0943a1a03676d4c9632562675aa850, type: 3}
   mapChangeEffectTime: 0
   bonus: 77777

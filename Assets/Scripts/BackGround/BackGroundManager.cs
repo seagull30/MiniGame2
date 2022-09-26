@@ -6,6 +6,7 @@ using UnityEngine;
 public class BackGroundManager : MonoBehaviour
 {
     private Transform[] _backgrounds;
+    private SpriteRenderer[] _sprites;
     private int _childsCount;
 
     private float _upPosY = 0f;
@@ -16,18 +17,19 @@ public class BackGroundManager : MonoBehaviour
 
     private bool prevBackgroundIndex;
 
-    private readonly string BACKGROUND_SPRITES_FILENAME = "Assets/Resources/BackgroundSprites/";
-    private readonly string SCRIPTSOBJECTS_BACKGROUND_FILENAME = "Assets/Resources/ScriptableData/Background/"; //파일 이름
+    private readonly string SCRIPTSOBJECTS_BACKGROUND_FILENAME = "ScriptableData/Background/"; //파일 이름
     public static BackGroundItem[] backgroundData;
+    private int backgroundDataIndex;
 
     private void Awake()
     {
         _childsCount = transform.childCount;
         _backgrounds = new Transform[_childsCount];
-
+        _sprites = new SpriteRenderer[_childsCount];
         for (int i = 0; i < _childsCount; ++i)
         {
             _backgrounds[i] = transform.GetChild(i);
+            _sprites[i] = _backgrounds[i].GetComponent<SpriteRenderer>();
         }
         prevBackgroundIndex = false;
     }
@@ -36,11 +38,8 @@ public class BackGroundManager : MonoBehaviour
     {
         GameManager.Instance.playerOnCiling += OnUPMove;
         backgroundData = Resources.LoadAll<BackGroundItem>(SCRIPTSOBJECTS_BACKGROUND_FILENAME);
-        for(int i = 0; i < backgroundData.Length; ++i)
-        {
-            Debug.Log(backgroundData[i].id);
+        backgroundDataIndex = 0;
 
-        }        
     }
 
     void Start()
@@ -50,6 +49,7 @@ public class BackGroundManager : MonoBehaviour
 
         _upPosY = _yScreenHalfSize * 2 * _backgrounds.Length;
         _downPosY = -_yScreenHalfSize * 2;
+
     }
     public void OnUPMove(float distence)
     {
@@ -72,17 +72,25 @@ public class BackGroundManager : MonoBehaviour
     private void checkChangeBackground(bool prevBackgroundIndex)
     {
         int index = prevBackgroundIndex ? 1 : 0;
-        if (GameManager.Instance.Score > 1000)
+        Debug.Log($"{backgroundData[backgroundDataIndex].maxScore}, {backgroundData[backgroundDataIndex].minScore},{GameManager.Instance.Score}");
+
+        if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].maxScore)
         {
-            Sprite changeSprite = _backgrounds[index].GetComponent<SpriteRenderer>().sprite;
+            _sprites[index].sprite = backgroundData[backgroundDataIndex].mapChangeEffect;
+           _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
 
+            ++backgroundDataIndex;
+            return;
         }
-
+        if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].minScore)
+        {
+            _sprites[index].sprite = backgroundData[backgroundDataIndex].itemImage;
+            _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
+        }
     }
 
     private void OnDisable()
     {
         GameManager.Instance.playerOnCiling -= OnUPMove;
-
     }
 }

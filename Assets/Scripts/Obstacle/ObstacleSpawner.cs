@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ObstacleSpawner : MonoBehaviour
 {
@@ -13,16 +9,26 @@ public class ObstacleSpawner : MonoBehaviour
     public float randomTime = 0f;
     private Vector2 _poolPosition;
 
+    private void Awake()
+    {
+        objectItem = Resources.Load<ObjectItem>($"ScriptableData/Object/{gameObject.name}");
+    }
     private void Start()
     {
+        //Debug.Log("Assets/Resources/ScriptableData/Object/" + gameObject.name);
+
         //랜덤 시간마다 생성되게 설정하기
         randomTime = Random.Range(objectItem.minSpawnTime, objectItem.maxSpawnTime);
+    }
+
+    private void OnEnable()
+    {
     }
 
     private void Update()
     {
         //시간이 랜덤 시간 이상이 되면 생성
-        if(_timer > randomTime)
+        if (_timer > randomTime)
         {
             _timer = 0f;
             randomTime = Random.Range((float)objectItem.minSpawnTime, (float)objectItem.maxSpawnTime);
@@ -42,8 +48,8 @@ public class ObstacleSpawner : MonoBehaviour
             }
 
 
-                //오브젝트 생성
-                     GameObject child = Instantiate(objectItem.itemPrefab, _poolPosition, Quaternion.identity);
+            //오브젝트 생성
+            GameObject child = Instantiate(objectItem.itemPrefab, _poolPosition, Quaternion.identity);
             child.transform.SetParent(this.transform);
 
         }

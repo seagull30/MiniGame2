@@ -34,15 +34,11 @@ public class GameManager : SingletonBehaviour<GameManager>
     public float StartTime;
     public float PlayTime;
 
-    private void Awake()
-    {
-        StartTime = Time.time;
-        //player.playerOnCiling += PlayerOnCiling;
-    }
 
     public void Start()
     {
-
+        StartTime = Time.time;
+        //player.playerOnCiling += PlayerOnCiling;
     }
     public void addScore(int points)
     {

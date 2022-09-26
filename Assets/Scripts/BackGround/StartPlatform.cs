@@ -39,7 +39,6 @@ public class StartPlatform : MonoBehaviour
 
     private void selfDeactivate()
     {
-        StopAllCoroutines();
         gameObject.SetActive(false);
     }
 }

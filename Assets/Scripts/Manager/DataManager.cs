@@ -135,6 +135,12 @@ public class DataManager : MonoBehaviour
 
         JsonUpload();
 
+
+        if (!Directory.Exists("Assets/Resources/"));
+        {
+            Directory.CreateDirectory("Assets/Resources/");
+        }
+
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -235,13 +241,14 @@ public class DataManager : MonoBehaviour
                         ObjectItem scObject = ScriptableObject.CreateInstance<ObjectItem>();
                         scObject.id = record.ID;
                         scObject.itemName = record.Name;
-                        
+
                         //이미지 스프라이트 설정
-                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.png", typeof(Sprite));
+                        //Debug.Log($"Images/Object{record.ID}.png");
+                        Sprite objSprite = Resources.Load<Sprite>($"Images/Object{record.ID}");
                         scObject.itemImage = objSprite; //sprite
                         
                         //프리팹 설정
-                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs2/Object{record.ID}.prefab", typeof(GameObject));
+                        GameObject objPrefab = Resources.Load<GameObject>($"Prefabs/Object{record.ID}");
                         scObject.itemPrefab = objPrefab;
                         
                         scObject.moveSpeed = record.Move_Speed;
@@ -264,7 +271,7 @@ public class DataManager : MonoBehaviour
                         scObject.minSpawnTime = record.Min_Spawn_Time;
                         scObject.maxSpawnTime = record.Max_Spawn_Time;
 
-                        AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/Object{record.ID}.asset");
+                       // AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/ObjectSpawner{record.ID}.asset");
                     }
 
                     string json = JsonUtility.ToJson(saveObject);//제이슨화
@@ -294,8 +301,9 @@ public class DataManager : MonoBehaviour
                         scBackGround.id = record.ID;
                         scBackGround.itemName = record.Name;
 
+                        Debug.Log($"BackGrounds/background{record.Map_Image}");
                         //이미지 스프라이트 설정
-                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/background{record.Map_Image}.png", typeof(Sprite));
+                        Sprite objSprite = Resources.Load<Sprite>($"BackGrounds/background{record.Map_Image}");
                         scBackGround.itemImage = objSprite; //sprite
 
                         //프리팹 설정
@@ -306,15 +314,16 @@ public class DataManager : MonoBehaviour
                         scBackGround.maxScore = record.Map_Change_Max_Score;
                         //scBackGround.BGM = record.BGM;
 
+                        Debug.Log($"Assets/Images/background{record.Map_Change_Effect}");
                         //이팩트 스프라이트 설정
-                        Sprite objEffect = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/background{record.Map_Change_Effect}.png", typeof(Sprite));
+                        Sprite objEffect = Resources.Load<Sprite>($"BackGrounds/background{record.Map_Change_Effect}");
                         scBackGround.mapChangeEffect = objEffect; //sprite
 
                         scBackGround.mapChangeEffectTime = record.Map_Change_Effect_Time;
                         scBackGround.bonus = record.Bonus;
 
 
-                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
+                       // AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
                     }
                     string json = JsonUtility.ToJson(saveBackGround);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND, json);
@@ -347,7 +356,7 @@ public class DataManager : MonoBehaviour
                         scBackGround.conditinal = record.Conditional;
                         scBackGround.completion = record.Completion;
 
-                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
+                       // AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
 
                     }
 

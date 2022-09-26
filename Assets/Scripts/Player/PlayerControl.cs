@@ -45,8 +45,6 @@ public class PlayerControl : MonoBehaviour
     };
 
     private bool _isCeiling = false;
-    private bool _isDead;
-
 
     private Animator _animator;
     private static class AnimationID
