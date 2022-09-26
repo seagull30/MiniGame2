@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBehaviour<GameManager>
 {
-    PlayerControl player;
+    public PlayerControl player;
     public bool IsGameOver = false;
 
     public UnityAction<int> OnScoreChange;
@@ -36,9 +36,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     private void Awake()
     {
-        player = FindObjectOfType<PlayerControl>();
         StartTime = Time.time;
-        player.playerOnCiling += PlayerOnCiling;
+        //player.playerOnCiling += PlayerOnCiling;
     }
 
     public void Start()
@@ -58,10 +57,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void reset()
     {
         SceneManager.LoadScene("Main");
-        player = FindObjectOfType<PlayerControl>();
-        player.playerOnCiling += playerOnCiling;
+        //player.playerOnCiling += playerOnCiling;
         StartTime = Time.time;
         Score = 0;
+    }
+
+    public void goTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
     public void GameOver()
     {

@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class StartPlatform : MonoBehaviour
 {
+    private SpriteRenderer _spriteRenderer;
+
+
     float moveSpeed = 1f;
     private void Awake()
     {
         Invoke("selfDeactivate", 3f);
-        StartCoroutine(fallingPlatform());
+       // StartCoroutine(fallingPlatform());
+    }
+    private void OnEnable()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sortingOrder = 1;
+        GameManager.Instance.playerOnCiling += OnUPMove;
     }
 
-    IEnumerator fallingPlatform()
+    //IEnumerator fallingPlatform()
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    while(true)
+    //    {
+    //        float _moveDistance = moveSpeed * Time.deltaTime;
+    //        transform.position += new Vector3(0, -_moveDistance, 0);
+    //        yield return null;
+    //    }
+    //}
+
+    public void OnUPMove(float distence)
     {
-        yield return new WaitForSeconds(1f);
-        while(true)
-        {
-            float _moveDistance = moveSpeed * Time.deltaTime;
-            transform.position += new Vector3(0, -_moveDistance, 0);
-            yield return null;
-        }
+        transform.position += new Vector3(0, -distence, 0);
     }
+
 
     private void selfDeactivate()
     {

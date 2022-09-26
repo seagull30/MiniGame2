@@ -15,7 +15,7 @@ public class SaveAndLoad : MonoBehaviour
 
 
     private string SAVE_DATA_DIRECTORY; //저장할 폴더 경로
-    private string SAVE_USER = "/SaveUser.txt"; //유저 파일
+    //private string SAVE_USER = "/SaveUser.txt"; //유저 파일
 
     // Start is called before the first frame update
     void Start()

@@ -47,6 +47,16 @@ public class PlayerControl : MonoBehaviour
     private bool _isCeiling = false;
     private bool _isDead;
 
+
+    private Animator _animator;
+    private static class AnimationID
+    {
+        public static readonly int OVERLOAD = Animator.StringToHash("Overload");
+        public static readonly int ISMOVE = Animator.StringToHash("IsMove");
+
+    }
+
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -54,8 +64,17 @@ public class PlayerControl : MonoBehaviour
         _overloadBar.maxValue = _maxOverloadLevel;
         _overloadBar.value = 0f;
         _overloadBarColor = _overloadBar.transform.Find("Fill Area").GetComponentInChildren<Image>();
+        _animator = GetComponent<Animator>();
         StartCoroutine(getScore());
     }
+
+    private void Start()
+    {
+        GameManager.Instance.player = gameObject.GetComponent<PlayerControl>();
+        GameManager.Instance.player.playerOnCiling += GameManager.Instance.PlayerOnCiling;
+
+    }
+
 
     private void Update()
     {
@@ -119,6 +138,8 @@ public class PlayerControl : MonoBehaviour
         if (!_isMove)
             return;
 
+        _animator.SetBool(AnimationID.ISMOVE, true);
+
         _elapsedTime += Time.deltaTime;
 
         _moveDistance = _moveSpeed * Time.deltaTime;
@@ -144,6 +165,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (_isMove)
             return;
+
+        _animator.SetBool(AnimationID.ISMOVE, false);
+
+
         _elapsedTime += Time.deltaTime;
 
         _moveDistance = -(_fallingSpeed * Time.deltaTime);
@@ -188,6 +213,7 @@ public class PlayerControl : MonoBehaviour
                 _overloadBar.value = _maxOverloadLevel;
                 _isOverload = true;
                 _isCoroutineRunning = false;
+                _animator.SetTrigger(AnimationID.OVERLOAD);
                 break;
             }
             if (_overloadBar.value <= 0f)

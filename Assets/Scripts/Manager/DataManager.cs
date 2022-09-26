@@ -32,7 +32,7 @@ public class CsvBackGround
     public int Map_Change_Min_Score { get; set; }
     public int Map_Change_Max_Score { get; set; }
     public string BGM { get; set; }
-    public int Map_Change_Effect { get; set; }
+    public string Map_Change_Effect { get; set; }
     public int Map_Change_Effect_Time { get; set; }
     public int Bonus { get; set; }
 
@@ -75,7 +75,7 @@ public class SaveDataBackGround
     public List<int> Map_Change_Min_Score = new List<int>();
     public List<int> Map_Change_Max_Score = new List<int>();
     public List<string> BGM = new List<string>();
-    public List<int> Map_Change_Effect = new List<int>();
+    public List<string> Map_Change_Effect = new List<string>();
     public List<int> Map_Change_Effect_Time = new List<int>();
     public List<int> Bonus = new List<int>();
 }
@@ -117,16 +117,37 @@ public class DataManager : MonoBehaviour
     private string SAVE_FILENAME_ACHIEVEMENT = "/SaveFileAchievement.txt"; //파일 이름
     private string SAVE_USER = "/SaveUser.txt";
 
+    private readonly string path = "Assets/Resources/ScriptableData/";
+
     void Start()
     {
         SAVE_DATA_DIRECTORY = Application.dataPath + "/Save/";
 
         JsonUpload();
-        
+
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        if (!Directory.Exists(path + "Object/"))
+        {
+            Directory.CreateDirectory(path + "Object/");
+        }
+        if (!Directory.Exists(path + "Background/"))
+        {
+            Directory.CreateDirectory(path + "Background/");
+        }
+        if (!Directory.Exists(path + "Achievement/"))
+        {
+            Directory.CreateDirectory(path + "Achievement/");
+        }
+
         DataUpload("Csv/CSV_obstacle", 1);
         DataUpload("Csv/CSV_background", 2);
         DataUpload("Csv/CSV_achievement", 3);
 
+
+        
         
     }
 
@@ -201,12 +222,12 @@ public class DataManager : MonoBehaviour
                         scObject.itemName = record.Name;
                         
                         //이미지 스프라이트 설정
-                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.jpg", typeof(Sprite));
-                        scObject.itemImage = objSprite; //sprite
+                       // Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.jpg", typeof(Sprite));
+                        //scObject.itemImage = objSprite; //sprite
                         
                         //프리팹 설정
-                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Object{record.ID}.prefab", typeof(GameObject));
-                        scObject.itemPrefab = objPrefab;
+                        //GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Object{record.ID}.prefab", typeof(GameObject));
+                        //scObject.itemPrefab = objPrefab;
                         
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
@@ -216,7 +237,7 @@ public class DataManager : MonoBehaviour
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
                         scObject.coolTime = record.Cool_Time;
 
-                        AssetDatabase.CreateAsset(scObject, $"Assets/ScriptableData/Object/Object{record.ID}.asset");
+                        AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/Object{record.ID}.asset");
                     }
 
                     string json = JsonUtility.ToJson(saveObject);//제이슨화
@@ -247,22 +268,26 @@ public class DataManager : MonoBehaviour
                         scBackGround.itemName = record.Name;
 
                         //이미지 스프라이트 설정
-                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Background{record.ID}.jpg", typeof(Sprite));
+                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/background{record.Map_Image}.png", typeof(Sprite));
                         scBackGround.itemImage = objSprite; //sprite
 
                         //프리팹 설정
-                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Background{record.ID}.prefab", typeof(GameObject));
-                        scBackGround.itemPrefab = objPrefab;
+                        //GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Background{record.ID}.prefab", typeof(GameObject));
+                        //scBackGround.itemPrefab = objPrefab;
 
                         scBackGround.minScore = record.Map_Change_Min_Score;
                         scBackGround.maxScore = record.Map_Change_Max_Score;
                         //scBackGround.BGM = record.BGM;
 
-                        scBackGround.mapChangeEffect = record.Map_Change_Effect;
+                        //이팩트 스프라이트 설정
+                        Sprite objEffect = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/background{record.Map_Change_Effect}.png", typeof(Sprite));
+                        scBackGround.mapChangeEffect = objEffect; //sprite
+
                         scBackGround.mapChangeEffectTime = record.Map_Change_Effect_Time;
                         scBackGround.bonus = record.Bonus;
 
-                        AssetDatabase.CreateAsset(scBackGround, $"Assets/ScriptableData/Background/Background{record.ID}.asset");
+
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
                     }
                     string json = JsonUtility.ToJson(saveBackGround);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND, json);
@@ -288,14 +313,14 @@ public class DataManager : MonoBehaviour
 
                         //이미지 스프라이트 설정
                         //프리팹 설정
-                        GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Achievement{record.ID}.prefab", typeof(GameObject));
-                        scBackGround.itemPrefab = objPrefab;
+                        //GameObject objPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Prefabs/Achievement{record.ID}.prefab", typeof(GameObject));
+                        //scBackGround.itemPrefab = objPrefab;
 
                         scBackGround.conditinalType = record.Conditional_Type;
                         scBackGround.conditinal = record.Conditional;
                         scBackGround.completion = record.Completion;
 
-                        AssetDatabase.CreateAsset(scBackGround, $"Assets/ScriptableData/Achievement/Achievement{record.ID}.asset");
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
 
                     }
 
