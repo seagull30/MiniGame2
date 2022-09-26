@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: Object6
   m_EditorClassIdentifier: 
   id: 6
-  itemName: RightPlane
-  itemImage: {fileID: -896139276, guid: ee5924dd47b31ca49b412765a2b4741b, type: 3}
-  itemPrefab: {fileID: 4923821515875828462, guid: ca2aebbce253d684b8ffceeafd2c1832, type: 3}
-  moveSpeed: 6
-  minScore: 8000
-  maxScore: 12000
+  itemName: "\uC778\uACF5\uC704\uC131"
+  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 0}
+  moveSpeed: 8
+  minScore: 30000
+  maxScore: 60000
+  loop: 0
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  minXValue: 1080
-  maxXValue: 1080
-  minYValue: 1
-  maxYValue: 1150
-  maxSpawn: 0
-  minSpawnTime: 1
-  maxSpawnTime: 2
+  coolTime: 0

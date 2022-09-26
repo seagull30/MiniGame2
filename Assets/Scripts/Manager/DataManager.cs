@@ -10,21 +10,18 @@ using UnityEditor;
 
 public class CsvObject
 {
+
     public int ID { get; set; }
     public string Name { get; set; }
     public string Object_Image {get; set;}
     public int Move_Speed { get; set; }
     public int Spawn_Min_Score { get; set; }
     public int Spawn_Max_Score { get; set; }
-    public int Effect_Sound { get; set; }
+    public bool Loop { get; set; }
+    public string Effect_Sound { get; set; }
     public bool Effect_Sound_Loop { get; set; }
-    public int Min_X_Value { get; set; }
-    public int Max_X_Value { get; set; }
-    public int Min_Y_Value { get; set; }
-    public int Max_Y_Value { get; set; }
-    public int Max_Spawn { get; set; }
-    public int Min_Spawn_Time { get; set; }
-    public int Max_Spawn_Time { get; set; }
+    public int Cool_Time { get; set; }
+
 }
 
 public class CsvBackGround
@@ -61,15 +58,10 @@ public class SaveDataObject
     public List<int> Move_Speed = new List<int>();
     public List<int> Spawn_Min_Score = new List<int>();
     public List<int> Spawn_Max_Score = new List<int>();
-    public List<int> Effect_Sound = new List<int>();
+    public List<bool> Loop = new List<bool>();
+    public List<string> Effect_Sound = new List<string>();
     public List<bool> Effect_Sound_Loop = new List<bool>();
-    public List<int> Min_X_Value = new List<int>();
-    public List<int> Max_X_Value = new List<int>();
-    public List<int> Min_Y_Value = new List<int>();
-    public List<int> Max_Y_Value = new List<int>();
-    public List<int> Max_Spawn = new List<int>();
-    public List<int> Min_Spawn_Time = new List<int>();
-    public List<int> Max_Spawn_Time = new List<int>();
+    public List<int> Cool_Time = new List<int>();
 }
 
 [SerializeField]
@@ -168,7 +160,6 @@ public class DataManager : MonoBehaviour
             using (CsvReader csv = new CsvReader(csvString, config))
             {
 
-
                 //유저 정보 저장
                 saveUser.UserName = "User";
                 //임시 데이터 저장
@@ -194,25 +185,17 @@ public class DataManager : MonoBehaviour
 
                     foreach (CsvObject record in records)
                     {
-
-                        //json 데이터로 만들어줌
                         saveObject.ID.Add(record.ID);
                         saveObject.Name.Add(record.Name);
                         saveObject.Object_Image.Add(record.Object_Image);
                         saveObject.Move_Speed.Add(record.Move_Speed);
                         saveObject.Spawn_Min_Score.Add(record.Spawn_Min_Score);
                         saveObject.Spawn_Max_Score.Add(record.Spawn_Max_Score);
+                        saveObject.Loop.Add(record.Loop);
                         saveObject.Effect_Sound.Add(record.Effect_Sound);
                         saveObject.Effect_Sound_Loop.Add(record.Effect_Sound_Loop);
-                        saveObject.Min_X_Value.Add(record.Min_X_Value);
-                        saveObject.Max_X_Value.Add(record.Max_X_Value);
-                        saveObject.Min_Y_Value.Add(record.Min_Y_Value);
-                        saveObject.Max_Y_Value.Add(record.Max_Y_Value);
-                        saveObject.Max_Spawn.Add(record.Max_Spawn);
-                        saveObject.Min_Spawn_Time.Add(record.Min_Spawn_Time);
-                        saveObject.Max_Spawn_Time.Add(record.Max_Spawn_Time);
+                        saveObject.Cool_Time.Add(record.Cool_Time);
 
-                        //스크립터블 오브젝트로 만들어줌
                         ObjectItem scObject = ScriptableObject.CreateInstance<ObjectItem>();
                         scObject.id = record.ID;
                         scObject.itemName = record.Name;
@@ -228,24 +211,10 @@ public class DataManager : MonoBehaviour
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
                         scObject.maxScore = record.Spawn_Max_Score;
-
-                        //사운드가 있을때 설정해줌
-                        if(record.Effect_Sound == 1)
-                        {
-                            AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
-
-                            scObject.effectSound = objEffectSound;
-                        }
-
+                        scObject.loop = record.Loop;
+                        //scObject.effectSound = record.Effect_Sound;
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
-                        scObject.minXValue = record.Min_X_Value;
-                        scObject.maxXValue = record.Max_X_Value;
-                        scObject.minYValue = record.Min_Y_Value;
-                        scObject.maxYValue = record.Max_Y_Value;
-                        scObject.maxSpawn = record.Max_Spawn;
-                        scObject.minSpawnTime = record.Min_Spawn_Time;
-                        scObject.maxSpawnTime = record.Max_Spawn_Time;
-                        
+                        scObject.coolTime = record.Cool_Time;
 
                         AssetDatabase.CreateAsset(scObject, $"Assets/ScriptableData/Object/Object{record.ID}.asset");
                     }
@@ -278,7 +247,7 @@ public class DataManager : MonoBehaviour
                         scBackGround.itemName = record.Name;
 
                         //이미지 스프라이트 설정
-                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Background{record.ID}.png", typeof(Sprite));
+                        Sprite objSprite = (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Images/Background{record.ID}.jpg", typeof(Sprite));
                         scBackGround.itemImage = objSprite; //sprite
 
                         //프리팹 설정

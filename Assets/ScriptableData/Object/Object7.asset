@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: Object7
   m_EditorClassIdentifier: 
   id: 7
-  itemName: UFO
-  itemImage: {fileID: -536231064, guid: 89ac81775ef7b8a48b4256687e7c4c51, type: 3}
-  itemPrefab: {fileID: 6604163654160891891, guid: 25ea0a6659590d74aaf1528077fdf9ce, type: 3}
-  moveSpeed: 6
-  minScore: 12000
-  maxScore: 30000
+  itemName: "\uC6B0\uC8FC\uC4F0\uB808\uAE30"
+  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 0}
+  moveSpeed: 5
+  minScore: 25000
+  maxScore: 1000000
+  loop: 0
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  minXValue: 1
-  maxXValue: 1
-  minYValue: 1
-  maxYValue: 1150
-  maxSpawn: 0
-  minSpawnTime: 1
-  maxSpawnTime: 2
+  coolTime: 0

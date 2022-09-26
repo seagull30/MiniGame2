@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: Object8
   m_EditorClassIdentifier: 
   id: 8
-  itemName: LeftTrash
-  itemImage: {fileID: -997110122, guid: ed112fcf4207ce744aecbc72c3207580, type: 3}
-  itemPrefab: {fileID: 4975861514067060532, guid: d306f028e99395e4fb103550bf4a336b, type: 3}
-  moveSpeed: 8
-  minScore: 30000
-  maxScore: 60000
+  itemName: "\uC18C\uD589\uC131\uC794\uD574"
+  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 0}
+  moveSpeed: 9
+  minScore: 40000
+  maxScore: 1000000
+  loop: 0
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  minXValue: 1080
-  maxXValue: 1080
-  minYValue: 1
-  maxYValue: 1150
-  maxSpawn: 0
-  minSpawnTime: 1
-  maxSpawnTime: 2
+  coolTime: 0

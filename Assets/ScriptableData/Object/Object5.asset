@@ -13,18 +13,13 @@ MonoBehaviour:
   m_Name: Object5
   m_EditorClassIdentifier: 
   id: 5
-  itemName: LeftPlane
-  itemImage: {fileID: -288945063, guid: 5bdec89566fefd749904afb8ab5a8404, type: 3}
-  itemPrefab: {fileID: 6970699016265885797, guid: 90cbba84b292361409205fc301821e76, type: 3}
+  itemName: "\uC720\uC131"
+  itemImage: {fileID: 0}
+  itemPrefab: {fileID: 0}
   moveSpeed: 6
-  minScore: 8000
-  maxScore: 12000
+  minScore: 12000
+  maxScore: 30000
+  loop: 0
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  minXValue: 1
-  maxXValue: 1
-  minYValue: 1
-  maxYValue: 1150
-  maxSpawn: 0
-  minSpawnTime: 1
-  maxSpawnTime: 2
+  coolTime: 0
