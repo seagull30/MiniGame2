@@ -14,14 +14,8 @@ public class ObjectItem : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
     public int moveSpeed; //스피드
     public int minScore;  // 스코어
     public int maxScore;
+    public bool loop;
     public AudioClip effectSound;
     public bool effectSoundLoop;
-    public int minXValue;
-    public int maxXValue;
-    public int minYValue;
-    public int maxYValue;
-    public int maxSpawn;
-    public int minSpawnTime;
-    public int maxSpawnTime;
-
+    public int coolTime;
 }
