@@ -1105,32 +1105,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectSounds:
   - name: object1
-    clip: {fileID: 8300000, guid: 938f7980d5d149c4ca8af3c741740f5b, type: 3}
+    clip: {fileID: 8300000, guid: 16dad8c87e592054fb147f8a586b90fc, type: 3}
   - name: object2
-    clip: {fileID: 8300000, guid: a76db91650428ff46955444590a93f2c, type: 3}
+    clip: {fileID: 8300000, guid: 43d2ed710875b6b4fa51f73e8b0f4cc3, type: 3}
   - name: object3
-    clip: {fileID: 8300000, guid: 68c24ccaeac64f74cbe947f3d31d08fa, type: 3}
+    clip: {fileID: 8300000, guid: ef9de9e7a49f50f47a18c47767feb3c8, type: 3}
   - name: object4
-    clip: {fileID: 8300000, guid: 95032080e4a382e4290e80eba71e7bc0, type: 3}
-  - name: object5
-    clip: {fileID: 8300000, guid: 5a60c35c6d5ebed4f9394354c5388dd0, type: 3}
-  - name: object6
-    clip: {fileID: 8300000, guid: 5a60c35c6d5ebed4f9394354c5388dd0, type: 3}
-  - name: object7
-    clip: {fileID: 8300000, guid: 5a60c35c6d5ebed4f9394354c5388dd0, type: 3}
-  - name: object8
-    clip: {fileID: 8300000, guid: 5a60c35c6d5ebed4f9394354c5388dd0, type: 3}
+    clip: {fileID: 8300000, guid: 021a6b361aa655745838149317eeea3c, type: 3}
   bgmSounds:
-  - name: background1
+  - name: TitleBackground
+    clip: {fileID: 8300000, guid: f05207ddae37a1c47b32340a26da1c89, type: 3}
+  - name: BackGround1
     clip: {fileID: 8300000, guid: 0d9b2bd1635bcb047b46f5b6f0d29c9c, type: 3}
-  - name: background2
+  - name: BackGround2
     clip: {fileID: 8300000, guid: 0a78561042f198d4a94c356ec4068f9e, type: 3}
-  - name: background1
-    clip: {fileID: 8300000, guid: 0d9b2bd1635bcb047b46f5b6f0d29c9c, type: 3}
-  - name: background2
-    clip: {fileID: 8300000, guid: 0a78561042f198d4a94c356ec4068f9e, type: 3}
-  - name: background1
-    clip: {fileID: 8300000, guid: 0a78561042f198d4a94c356ec4068f9e, type: 3}
+  - name: BackGround4
+    clip: {fileID: 8300000, guid: 1848edfdcdc8f93468c564d6b558838b, type: 3}
   audioSourceBGM: {fileID: 1365231442}
   audioSourceEffects:
   - {fileID: 1689777438}

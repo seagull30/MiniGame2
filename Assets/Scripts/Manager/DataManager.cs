@@ -339,6 +339,8 @@ public class DataManager : MonoBehaviour
                         scBackGround.mapChangeEffectTime = record.Map_Change_Effect_Time;
                         scBackGround.bonus = record.Bonus;
 
+                        scBackGround.BGM = record.BGM;
+
 
                         AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
                     }

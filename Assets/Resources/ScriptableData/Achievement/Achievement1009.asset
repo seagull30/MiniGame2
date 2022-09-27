@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Achievement1009
   m_EditorClassIdentifier: 
   id: 1009
-  itemName: 0
+  itemName: "\uD3D0\uC778"
   itemPrefab: {fileID: 0}
-  conditinalType: 0
-  conditinal: 0
+  conditinalType: 4
+  conditinal: 86400
   completion: 0

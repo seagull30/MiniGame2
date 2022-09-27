@@ -8,6 +8,11 @@ public class OptionUI : MonoBehaviour
     private GameObject[] _childs;
     private int _childCount;
 
+    private Sprite _onsprite;
+    private Sprite _offsprite;
+
+    private readonly string _effectSound = "Button";
+
     private void Awake()
     {
         _childCount = transform.childCount;
@@ -23,52 +28,57 @@ public class OptionUI : MonoBehaviour
 
     public void onClickEvent()
     {
+        //Time.fixedDeltaTime = 0f;
         Time.timeScale = 0f;
-        Time.fixedDeltaTime = 0f;
         GameManager.Instance._ispause = true;
 
         for (int i = 0; i < _childCount; ++i)
         {
             _childs[i].SetActive(true);
         }
+        SoundManager.instance.PlaySE(_effectSound);
     }
 
     public void onClickEventReturn()
     {
+        //Time.fixedDeltaTime = 1f;
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 1f;
         GameManager.Instance._ispause = false;
 
         for (int i = 0; i < _childCount; ++i)
         {
             _childs[i].SetActive(false);
         }
+        SoundManager.instance.PlaySE(_effectSound);
     }
 
     public void onClickEventReturnRobby()
     {
+        //Time.fixedDeltaTime = 1f;
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 1f;
+        SoundManager.instance.PlaySE(_effectSound);
         GameManager.Instance.goTitle();
     }
 
 
     public void BgmSoundControl()
     {
-        if (SoundManager.BGMActivated)
+        if (SoundManager.instance.BGMActivated)
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopBGM_M();
+
         }
         else
         {
             SoundManager.instance.StartBGM_M();
         }
+        SoundManager.instance.PlaySE(_effectSound);
     }
 
     public void EffectSoundControl()
     {
-        if (SoundManager.EffectActivated)
+        if (SoundManager.instance.EffectActivated)
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopEffect_M();
@@ -77,6 +87,7 @@ public class OptionUI : MonoBehaviour
         {
             SoundManager.instance.StartEffect_M();
         }
+        SoundManager.instance.PlaySE(_effectSound);
     }
 
 }

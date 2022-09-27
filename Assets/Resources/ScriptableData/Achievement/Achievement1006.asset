@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Achievement1006
   m_EditorClassIdentifier: 
   id: 1006
-  itemName: 0
+  itemName: "\uB7ED\uD0A4 \uC138\uBE10"
   itemPrefab: {fileID: 0}
-  conditinalType: 0
-  conditinal: 0
+  conditinalType: 1
+  conditinal: 77777
   completion: 0

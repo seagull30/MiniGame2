@@ -15,8 +15,9 @@ public class SoundManager : MonoBehaviour
 {
     //½Ì±ÛÅæ ±¸Çö
     static public SoundManager instance;
-    public static bool BGMActivated = true;
-    public static bool EffectActivated = true;
+    public bool BGMActivated = true;
+    public bool EffectActivated = true;
+
 
     private void Awake()
     {
@@ -42,10 +43,10 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         playSoundName = new string[audioSourceEffects.Length];
-        PlayBGM("background1");
-/*        PlaySE("object1");
-        PlaySE("object2");
-        PlaySE("object3");*/
+        PlayBGM("TitleBackground");
+        /*        PlaySE("object1");
+                PlaySE("object2");
+                PlaySE("object3");*/
     }
 
     public void PlaySE(string _name)
@@ -88,22 +89,22 @@ public class SoundManager : MonoBehaviour
     public void StopBGM_M()
     {
         audioSourceBGM.mute = true;
-        BGMActivated = false;
+        BGMActivated = !BGMActivated;
     }
 
     public void StartBGM_M()
     {
         audioSourceBGM.mute = false;
-        BGMActivated = true;
+        BGMActivated = !BGMActivated;
     }
 
     public void StopEffect_M()
     {
         for (int i = 0; i < audioSourceEffects.Length; i++)
         {
-            audioSourceEffects[i].mute = true; 
+            audioSourceEffects[i].mute = true;
         }
-        EffectActivated = false;
+        EffectActivated = !EffectActivated;
     }
 
     public void StartEffect_M()
@@ -112,7 +113,7 @@ public class SoundManager : MonoBehaviour
         {
             audioSourceEffects[i].mute = false;
         }
-        EffectActivated = true;
+        EffectActivated = !EffectActivated;
     }
 
 
