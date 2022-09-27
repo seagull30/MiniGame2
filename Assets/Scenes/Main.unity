@@ -1477,6 +1477,7 @@ MonoBehaviour:
   player: {fileID: 0}
   IsGameOver: 0
   stageScore: 10000
+  _ispause: 0
 --- !u!4 &1117248566
 Transform:
   m_ObjectHideFlags: 0
@@ -1994,9 +1995,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1360779081}
-        m_TargetAssemblyTypeName: TitleButton, Assembly-CSharp
-        m_MethodName: TitlebuttonAction
+      - m_Target: {fileID: 1216158956}
+        m_TargetAssemblyTypeName: OptionUI, Assembly-CSharp
+        m_MethodName: onClickEventReturnRobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2899,8 +2900,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883552667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -6.2457, z: 0}
+  m_LocalScale: {x: 1, y: 3.8839, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

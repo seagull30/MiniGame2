@@ -13,7 +13,7 @@ public class BackGroundItem : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
 
     public int minScore;  // 스코어
     public int maxScore;
-    public AudioClip BGM;
+    public string BGM;
     public Sprite mapChangeEffect;
     public int mapChangeEffectTime;
     public int bonus;

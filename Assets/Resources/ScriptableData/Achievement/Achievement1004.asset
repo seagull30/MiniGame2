@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Achievement1004
   m_EditorClassIdentifier: 
   id: 1004
-  itemName: 0
+  itemName: UFO?
   itemPrefab: {fileID: 0}
-  conditinalType: 0
-  conditinal: 0
+  conditinalType: 1
+  conditinal: 12000
   completion: 0

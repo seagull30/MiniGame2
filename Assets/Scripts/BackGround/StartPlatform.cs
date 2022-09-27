@@ -14,8 +14,6 @@ public class StartPlatform : MonoBehaviour
     }
     private void OnEnable()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sortingOrder = 1;
         GameManager.Instance.playerOnCiling += OnUPMove;
     }
 

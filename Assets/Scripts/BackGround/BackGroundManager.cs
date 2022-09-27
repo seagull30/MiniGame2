@@ -49,7 +49,8 @@ public class BackGroundManager : MonoBehaviour
 
         _upPosY = _yScreenHalfSize * 2 * _backgrounds.Length;
         _downPosY = -_yScreenHalfSize * 2;
-
+        //임시적용 김영훈 2022.9.27
+        SoundManager.instance.PlayBGM(backgroundData[backgroundDataIndex].BGM);
     }
     public void OnUPMove(float distence)
     {
@@ -72,7 +73,7 @@ public class BackGroundManager : MonoBehaviour
     private void checkChangeBackground(bool prevBackgroundIndex)
     {
         int index = prevBackgroundIndex ? 1 : 0;
-        Debug.Log($"{backgroundData[backgroundDataIndex].maxScore}, {backgroundData[backgroundDataIndex].minScore},{GameManager.Instance.Score}");
+        Debug.Log($" 배경 변화 : {backgroundData[backgroundDataIndex].maxScore}, {backgroundData[backgroundDataIndex].minScore},{GameManager.Instance.Score}");
 
         if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].maxScore)
         {
@@ -80,6 +81,7 @@ public class BackGroundManager : MonoBehaviour
             _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
 
             ++backgroundDataIndex;
+            SoundManager.instance.PlayBGM(backgroundData[backgroundDataIndex].BGM);
             return;
         }
         if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].minScore)
