@@ -12,11 +12,11 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public UnityAction<int> OnScoreChange;
 
-    public UnityAction<float, int, int> OnGameEnd;
+    public UnityAction<int, int> OnGameEnd;
 
     public UnityAction<float> playerOnCiling;
 
-    public int stageIndex = 1;
+    public int stageScore = 10000;
 
     private int _currentScore;
     public int Score
@@ -31,15 +31,7 @@ public class GameManager : SingletonBehaviour<GameManager>
             OnScoreChange.Invoke(_currentScore);
         }
     }
-    public float StartTime;
-    public float PlayTime;
 
-
-    public void Start()
-    {
-        StartTime = Time.time;
-        //player.playerOnCiling += PlayerOnCiling;
-    }
     public void addScore(int points)
     {
         Score += points;
@@ -53,8 +45,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void reset()
     {
         SceneManager.LoadScene("Main");
-        //player.playerOnCiling += playerOnCiling;
-        StartTime = Time.time;
         Score = 0;
     }
 
@@ -64,7 +54,6 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
     public void GameOver()
     {
-        PlayTime = Time.time - StartTime;
-        OnGameEnd.Invoke(PlayTime, Score, stageIndex);
+        OnGameEnd.Invoke(Score, stageScore);
     }
 }

@@ -45,13 +45,13 @@ public class PlayerControl : MonoBehaviour
     };
 
     private bool _isCeiling = false;
+    private bool _isDead;
 
     private Animator _animator;
     private static class AnimationID
     {
         public static readonly int OVERLOAD = Animator.StringToHash("Overload");
         public static readonly int ISMOVE = Animator.StringToHash("IsMove");
-
     }
 
 
@@ -70,7 +70,7 @@ public class PlayerControl : MonoBehaviour
     {
         GameManager.Instance.player = gameObject.GetComponent<PlayerControl>();
         GameManager.Instance.player.playerOnCiling += GameManager.Instance.PlayerOnCiling;
-
+        _isDead = false;
     }
 
 
@@ -84,6 +84,7 @@ public class PlayerControl : MonoBehaviour
             move();
             falling();
         }
+        changeColor();
         updateScore();
     }
 
@@ -197,6 +198,22 @@ public class PlayerControl : MonoBehaviour
             StartCoroutine(changeValue(-25f));
     }
 
+    private void changeColor()
+    {
+        if (_overloadBar.value <= 40)
+        {
+            _overloadBarColor.color = colors[0];
+        }
+        else if (_overloadBar.value <= 80)
+        {
+            _overloadBarColor.color = colors[1];
+        }
+        else
+        {
+            _overloadBarColor.color = colors[2];
+        }
+    }
+
     IEnumerator changeValue(float amounToChange)
     {
         _isCoroutineRunning = true;
@@ -220,20 +237,6 @@ public class PlayerControl : MonoBehaviour
                 _isOverload = false;
                 _isCoroutineRunning = false;
                 break;
-            }
-            if (_overloadBar.value <= 40)
-            {
-                _overloadBarColor.color = colors[0];
-            }
-            else if (_overloadBar.value <= 80)
-            {
-                _overloadBarColor.color = colors[1];
-
-            }
-            else
-            {
-                _overloadBarColor.color = colors[2];
-
             }
             yield return new WaitForSeconds(0.5f);
         }
@@ -263,6 +266,7 @@ public class PlayerControl : MonoBehaviour
         if (other.CompareTag("DeadZone"))
         {
             GameManager.Instance.GameOver();
+            _isDead = true;
             gameObject.SetActive(false);
         }
         if (other.CompareTag("Ceiling"))

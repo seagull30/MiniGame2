@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BackGroundManager : MonoBehaviour
 {
@@ -39,7 +40,6 @@ public class BackGroundManager : MonoBehaviour
         GameManager.Instance.playerOnCiling += OnUPMove;
         backgroundData = Resources.LoadAll<BackGroundItem>(SCRIPTSOBJECTS_BACKGROUND_FILENAME);
         backgroundDataIndex = 0;
-
     }
 
     void Start()
@@ -77,7 +77,7 @@ public class BackGroundManager : MonoBehaviour
         if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].maxScore)
         {
             _sprites[index].sprite = backgroundData[backgroundDataIndex].mapChangeEffect;
-           _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
+            _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
 
             ++backgroundDataIndex;
             return;
@@ -86,6 +86,7 @@ public class BackGroundManager : MonoBehaviour
         {
             _sprites[index].sprite = backgroundData[backgroundDataIndex].itemImage;
             _sprites[index].size = new Vector2(_xScreenHalfSize * 2, _yScreenHalfSize * 2);
+            GameManager.Instance.stageScore = backgroundData[backgroundDataIndex].bonus;
         }
     }
 

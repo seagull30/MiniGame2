@@ -136,7 +136,7 @@ public class DataManager : MonoBehaviour
         JsonUpload();
 
 
-        if (!Directory.Exists("Assets/Resources/"));
+        if (!Directory.Exists("Assets/Resources/"))
         {
             Directory.CreateDirectory("Assets/Resources/");
         }
@@ -163,8 +163,8 @@ public class DataManager : MonoBehaviour
         DataUpload("Csv/CSV_achievement", 3);
 
 
-        
-        
+
+
     }
 
     void JsonUpload()
@@ -176,7 +176,7 @@ public class DataManager : MonoBehaviour
     }
 
 
-    void DataUpload(string url, int classIndex) 
+    void DataUpload(string url, int classIndex)
     {
         //1. Resources 폴더에 잇는 CSV 파일을 TextAsset으로 로드함
         //TextAsset : 텍스트 파일
@@ -246,21 +246,21 @@ public class DataManager : MonoBehaviour
                         //Debug.Log($"Images/Object{record.ID}.png");
                         Sprite objSprite = Resources.Load<Sprite>($"Images/Object{record.ID}");
                         scObject.itemImage = objSprite; //sprite
-                        
+
                         //프리팹 설정
                         GameObject objPrefab = Resources.Load<GameObject>($"Prefabs/Object{record.ID}");
                         scObject.itemPrefab = objPrefab;
-                        
+
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
                         scObject.maxScore = record.Spawn_Max_Score;
-                        
-/*                        if (record.Effect_Sound == 1)
-                        {
-                            AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
 
-                            scObject.effectSound = objEffectSound;
-                        }*/
+                        /*                        if (record.Effect_Sound == 1)
+                                                {
+                                                    AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
+
+                                                    scObject.effectSound = objEffectSound;
+                                                }*/
 
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
                         scObject.minXValue = record.Min_X_Value;
@@ -271,14 +271,14 @@ public class DataManager : MonoBehaviour
                         scObject.minSpawnTime = record.Min_Spawn_Time;
                         scObject.maxSpawnTime = record.Max_Spawn_Time;
 
-                       // AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/ObjectSpawner{record.ID}.asset");
+                        AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/ObjectSpawner{record.ID}.asset");
                     }
 
                     string json = JsonUtility.ToJson(saveObject);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT, json);
 
                 }
-                else if(classIndex == 2)
+                else if (classIndex == 2)
                 {
                     //파싱한 데이터를 class 의 필드로 적용시켜줌
                     //코르틴에 넣을수 있음
@@ -323,7 +323,7 @@ public class DataManager : MonoBehaviour
                         scBackGround.bonus = record.Bonus;
 
 
-                       // AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
                     }
                     string json = JsonUtility.ToJson(saveBackGround);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND, json);
@@ -356,7 +356,7 @@ public class DataManager : MonoBehaviour
                         scBackGround.conditinal = record.Conditional;
                         scBackGround.completion = record.Completion;
 
-                       // AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
+                        AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
 
                     }
 

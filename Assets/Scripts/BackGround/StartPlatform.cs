@@ -7,7 +7,6 @@ public class StartPlatform : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
 
-    float moveSpeed = 1f;
     private void Awake()
     {
         Invoke("selfDeactivate", 3f);
@@ -40,5 +39,9 @@ public class StartPlatform : MonoBehaviour
     private void selfDeactivate()
     {
         gameObject.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.playerOnCiling -= OnUPMove;
     }
 }
