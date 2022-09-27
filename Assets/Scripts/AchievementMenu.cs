@@ -14,50 +14,45 @@ public class AchievementMenu : MonoBehaviour
     private GameObject poolingObjectPrefab;
 
 
-    private string SAVE_DATA_DIRECTORY; //저장할 폴더 경로
-    private string SAVE_USER = "/SaveUser.txt"; //유저 파일
+    private string SAVE_DATA_DIRECTORY = "Assets/Resources/Save"; //저장할 폴더 경로
     private string SAVE_FILENAME_ACHIEVEMENT = "/SaveFileAchievement.txt"; //파일 이름
 
     // Start is called before the first frame update
     void Start()
     {
-        SAVE_DATA_DIRECTORY = Application.dataPath + "/Save/";
-
-        if (!Directory.Exists(SAVE_DATA_DIRECTORY)) //해당 경로가 존재하지 않는다면
-        {
-            Directory.CreateDirectory(SAVE_DATA_DIRECTORY);//폴더 생성(경로 생성)
-        }
-
         LoadDataUser();
     }
 
     public void LoadDataUser()
     {
-        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_USER))
+
+
+        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT))
         {
             //전체 읽어 오기
             string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT);
             _saveDataAchievement = JsonUtility.FromJson<SaveDataAchievement>(loadJson);
 
-            var newObjtemp = Instantiate(poolingObjectPrefab, transform).GetComponent<TextMeshProUGUI>();
-            newObjtemp.gameObject.SetActive(true);
-            newObjtemp.text = " ";
-
-            //유저 업적 리스트 불러오기
-            for (int i = 0; i < _saveDataAchievement.Name.Count; i++)
+            for(int i = 0; i < _saveDataAchievement.Name.Count; i++)
             {
-                if(_saveDataAchievement.Name[i].ToString() != "0" && _saveDataAchievement.Completion[i].ToString() != "FALSE")
-                {
-                    //오브젝트 풀링으로 오브젝트 불러오기
-                    var newObj = Instantiate(poolingObjectPrefab, transform).GetComponent<TextMeshProUGUI>();
+                //오브젝트 생성후 false인지 아닌지에 따라 활성화 비활성화 시키기
+
+                var newObj = Instantiate(poolingObjectPrefab, transform);
+
+                if (_saveDataAchievement.Completion[i] != false)
+                { 
                     newObj.gameObject.SetActive(true);
-                    newObj.text = _saveDataAchievement.Name[i];
-                    var newObj2 = Instantiate(poolingObjectPrefab, transform).GetComponent<TextMeshProUGUI>();
-                    newObj2.gameObject.SetActive(true);
-                    newObj2.text = " ";
+                }
+                else
+                {
+                    newObj.gameObject.SetActive(false);
                 }
 
             }
+
+
+
+            
 
         }
     }
