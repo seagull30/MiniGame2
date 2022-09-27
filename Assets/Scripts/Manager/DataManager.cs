@@ -121,7 +121,7 @@ public class DataManager : MonoBehaviour
     public SaveDataAchievement saveAchievement = new SaveDataAchievement();
     public SaveUser saveUser = new SaveUser();
 
-    private string SAVE_DATA_DIRECTORY; //저장할 폴더 경로
+    private string SAVE_DATA_DIRECTORY = "Assets/Resources/Save"; //저장할 폴더 경로
     private string SAVE_FILENAME_OBJECT = "/SaveFileObject.txt"; //파일 이름
     private string SAVE_FILENAME_BACKGROUND = "/SaveFileBackGround.txt"; //파일 이름
     private string SAVE_FILENAME_ACHIEVEMENT = "/SaveFileAchievement.txt"; //파일 이름
@@ -131,15 +131,15 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
-        SAVE_DATA_DIRECTORY = Application.dataPath + "/Save/";
-
-        JsonUpload();
-
-
+        
         if (!Directory.Exists("Assets/Resources/"))
         {
             Directory.CreateDirectory("Assets/Resources/");
         }
+
+
+        JsonUpload();
+
 
         if (!Directory.Exists(path))
         {
@@ -158,13 +158,23 @@ public class DataManager : MonoBehaviour
             Directory.CreateDirectory(path + "Achievement/");
         }
 
-        DataUpload("Csv/CSV_obstacle", 1);
-        DataUpload("Csv/CSV_background", 2);
-        DataUpload("Csv/CSV_achievement", 3);
+
+        //json 파일이 존재할때 안만듬
+        if(!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT))
+        {
+            DataUpload("Csv/CSV_obstacle", 1);
+        }
+        if(!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND))
+        {
+            DataUpload("Csv/CSV_background", 2);
+        }
+        if (!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT))
+        {
+            DataUpload("Csv/CSV_achievement", 3);
+        }
 
 
-
-
+        
     }
 
     void JsonUpload()
@@ -173,10 +183,34 @@ public class DataManager : MonoBehaviour
         {
             Directory.CreateDirectory(SAVE_DATA_DIRECTORY);//폴더 생성(경로 생성)
         }
+
+        FileInfo fileInfo = new FileInfo(SAVE_DATA_DIRECTORY + SAVE_USER);
+
+        if (!fileInfo.Exists)
+        {
+
+            //유저 정보 저장
+            saveUser.UserName = "User";
+           /* //임시 데이터 저장
+            saveUser.UserScore.Add(1000);
+            saveUser.UserScore.Add(2000);
+            saveUser.UserScore.Add(3000);
+            saveUser.UserScore.Add(4000);
+
+            saveUser.UserScoreDate.Add("asdasd");
+            saveUser.UserScoreDate.Add("asdasd");
+            saveUser.UserScoreDate.Add("asdasd");
+            saveUser.UserScoreDate.Add("asdasd");
+            */
+
+            string jsonUser = JsonUtility.ToJson(saveUser);//제이슨화
+            File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
+        }
+
     }
 
 
-    void DataUpload(string url, int classIndex)
+    void DataUpload(string url, int classIndex) 
     {
         //1. Resources 폴더에 잇는 CSV 파일을 TextAsset으로 로드함
         //TextAsset : 텍스트 파일
@@ -196,23 +230,6 @@ public class DataManager : MonoBehaviour
         {
             using (CsvReader csv = new CsvReader(csvString, config))
             {
-
-                //유저 정보 저장
-                saveUser.UserName = "User";
-                //임시 데이터 저장
-                saveUser.UserScore.Add(1000);
-                saveUser.UserScore.Add(2000);
-                saveUser.UserScore.Add(3000);
-                saveUser.UserScore.Add(4000);
-
-                saveUser.UserScoreDate.Add("asdasd");
-                saveUser.UserScoreDate.Add("asdasd");
-                saveUser.UserScoreDate.Add("asdasd");
-                saveUser.UserScoreDate.Add("asdasd");
-
-
-                string jsonUser = JsonUtility.ToJson(saveUser);//제이슨화
-                File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
 
                 if (classIndex == 1)
                 {
@@ -246,21 +263,21 @@ public class DataManager : MonoBehaviour
                         //Debug.Log($"Images/Object{record.ID}.png");
                         Sprite objSprite = Resources.Load<Sprite>($"Images/Object{record.ID}");
                         scObject.itemImage = objSprite; //sprite
-
+                        
                         //프리팹 설정
                         GameObject objPrefab = Resources.Load<GameObject>($"Prefabs/Object{record.ID}");
                         scObject.itemPrefab = objPrefab;
-
+                        
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
                         scObject.maxScore = record.Spawn_Max_Score;
+                        
+/*                        if (record.Effect_Sound == 1)
+                        {
+                            AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
 
-                        /*                        if (record.Effect_Sound == 1)
-                                                {
-                                                    AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
-
-                                                    scObject.effectSound = objEffectSound;
-                                                }*/
+                            scObject.effectSound = objEffectSound;
+                        }*/
 
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
                         scObject.minXValue = record.Min_X_Value;
@@ -278,7 +295,7 @@ public class DataManager : MonoBehaviour
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT, json);
 
                 }
-                else if (classIndex == 2)
+                else if(classIndex == 2)
                 {
                     //파싱한 데이터를 class 의 필드로 적용시켜줌
                     //코르틴에 넣을수 있음
