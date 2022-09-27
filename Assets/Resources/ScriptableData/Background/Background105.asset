@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92e802cc3760534985e95a36bb5d7ac, type: 3}
+  m_Name: Background105
+  m_EditorClassIdentifier: 
+  id: 105
+  itemName: "\uC6B0\uC8FC"
+  itemImage: {fileID: 21300000, guid: 94f5a474dc502024ea5a12c181a7aec6, type: 3}
+  minScore: 60000
+  maxScore: 1000000000
+  BGM: {fileID: 0}
+  mapChangeEffect: {fileID: 21300000, guid: 8e553229aaf5ed748bc3aac4b3a7c219, type: 3}
+  mapChangeEffectTime: 0
+  bonus: 777777

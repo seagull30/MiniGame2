@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb8e281c4ed71e4db1d23f30c4d0f95, type: 3}
+  m_Name: ObjectSpawner2
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: RightBird
+  itemImage: {fileID: -1677158514, guid: 59516ddca1193c94bbe9954e297d3456, type: 3}
+  itemPrefab: {fileID: 3264152148722010609, guid: 3c30f71bef681b94baa5b3b17ec6db3d, type: 3}
+  moveSpeed: 3
+  minScore: 5
+  maxScore: 4000
+  effectSound: {fileID: 0}
+  effectSoundLoop: 0
+  minXValue: 1080
+  maxXValue: 1080
+  minYValue: 1
+  maxYValue: 1150
+  maxSpawn: 0
+  minSpawnTime: 1
+  maxSpawnTime: 2

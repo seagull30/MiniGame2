@@ -1,1 +1,0 @@
-{"UserName":"User","UserScore":[1000,2000,3000,4000,1000,2000,3000,4000,1000,2000,3000,4000],"UserScoreDate":["asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd","asdasd"],"UserAchievement":[]}
