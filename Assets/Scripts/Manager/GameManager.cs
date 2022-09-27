@@ -19,6 +19,9 @@ public class GameManager : SingletonBehaviour<GameManager>
     public int stageScore = 10000;
 
     private int _currentScore;
+
+    public bool _ispause = false;
+
     public int Score
     {
         get
@@ -34,7 +37,8 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public void addScore(int points)
     {
-        Score += points;
+        if (!_ispause)
+            Score += points;
     }
 
     public void PlayerOnCiling(float distence)
@@ -46,10 +50,14 @@ public class GameManager : SingletonBehaviour<GameManager>
     {
         SceneManager.LoadScene("Main");
         Score = 0;
+        stageScore = 10000;
     }
 
     public void goTitle()
     {
+        Score = 0;
+        stageScore = 10000;
+
         SceneManager.LoadScene("TitleScene");
     }
     public void GameOver()
