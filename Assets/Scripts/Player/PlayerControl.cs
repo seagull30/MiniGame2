@@ -70,6 +70,7 @@ public class PlayerControl : MonoBehaviour
     {
         GameManager.Instance.player = gameObject.GetComponent<PlayerControl>();
         GameManager.Instance.player.playerOnCiling += GameManager.Instance.PlayerOnCiling;
+        GameManager.Instance._ispause = false;
         _isDead = false;
     }
 
@@ -85,6 +86,8 @@ public class PlayerControl : MonoBehaviour
             falling();
         }
         changeColor();
+
+        //스코어 일시 정지 시켜야 함
         updateScore();
     }
 
@@ -260,6 +263,12 @@ public class PlayerControl : MonoBehaviour
     {
         GameManager.Instance.addScore(points);
     }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {

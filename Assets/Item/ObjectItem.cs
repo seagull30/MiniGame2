@@ -13,7 +13,7 @@ public class ObjectItem : ScriptableObject  // 게임 오브젝트에 붙일 필요 X
 
     public int moveSpeed; //스피드
     public int minScore;  // 스코어
-    public int maxScore;
+    public int maxScore;//;
     public AudioClip effectSound;
     public bool effectSoundLoop;
     public int minXValue;
