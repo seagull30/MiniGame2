@@ -2,14 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OptionUI : MonoBehaviour
 {
     private GameObject[] _childs;
     private int _childCount;
 
-    private Sprite _onsprite;
-    private Sprite _offsprite;
+    [SerializeField]
+    private Image _effectButtonSprite;
+    [SerializeField]
+    private Image _BgmButtonSprite;
+
+    [SerializeField]
+    private Sprite _onSprite;
+    [SerializeField]
+    private Sprite _offSprite;
 
     private readonly string _effectSound = "Button";
 
@@ -67,11 +75,12 @@ public class OptionUI : MonoBehaviour
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopBGM_M();
-
+            _effectButtonSprite.sprite = _offSprite;
         }
         else
         {
             SoundManager.instance.StartBGM_M();
+            _effectButtonSprite.sprite = _onSprite;
         }
         SoundManager.instance.PlaySE(_effectSound);
     }
@@ -82,10 +91,12 @@ public class OptionUI : MonoBehaviour
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopEffect_M();
+            _BgmButtonSprite.sprite = _offSprite;
         }
         else
         {
             SoundManager.instance.StartEffect_M();
+            _BgmButtonSprite.sprite = _onSprite;
         }
         SoundManager.instance.PlaySE(_effectSound);
     }

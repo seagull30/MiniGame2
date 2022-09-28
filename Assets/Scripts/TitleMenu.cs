@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleMenu : MonoBehaviour
 {
@@ -17,10 +18,17 @@ public class TitleMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject go_OptionBaseUI; //옵션 패널
-
+    [SerializeField]
+    private Image _effectButtonSprite;
+    [SerializeField]
+    private Image _BgmButtonSprite;
     private readonly string _effectSound = "Button";
-    private readonly string _bgmName= "TitleBGM";
+    private readonly string _bgmName = "TitleBGM";
 
+    [SerializeField]
+    private Sprite _onSprite;
+    [SerializeField]
+    private Sprite _offSprite;
 
     private void Start()
     {
@@ -74,10 +82,12 @@ public class TitleMenu : MonoBehaviour
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopBGM_M();
+            _BgmButtonSprite.sprite = _offSprite;
         }
         else
         {
             SoundManager.instance.StartBGM_M();
+            _BgmButtonSprite.sprite = _onSprite;
         }
         SoundManager.instance.PlaySE(_effectSound);
     }
@@ -88,10 +98,12 @@ public class TitleMenu : MonoBehaviour
         {
             //true 상태 였다면 끄기
             SoundManager.instance.StopEffect_M();
+            _effectButtonSprite.sprite = _offSprite;
         }
         else
         {
             SoundManager.instance.StartEffect_M();
+            _effectButtonSprite.sprite = _onSprite;
         }
         SoundManager.instance.PlaySE(_effectSound);
     }

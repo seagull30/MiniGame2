@@ -272,7 +272,10 @@ public class PlayerControl : MonoBehaviour
                 _overloadBar.value = _maxOverloadLevel;
                 _isOverload = true;
                 _isCoroutineRunning = false;
+                SoundManager.instance.StopAllSE();
                 _animator.SetTrigger(AnimationID.OVERLOAD);
+                _animator.SetBool(AnimationID.ISMOVE, false);
+
                 break;
             }
             if (_overloadBar.value <= 0f)
@@ -280,6 +283,7 @@ public class PlayerControl : MonoBehaviour
                 _overloadBar.value = 0f;
                 _isOverload = false;
                 _isCoroutineRunning = false;
+
                 break;
             }
             yield return new WaitForSeconds(0.5f);

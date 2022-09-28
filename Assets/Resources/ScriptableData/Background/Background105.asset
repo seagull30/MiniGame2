@@ -17,7 +17,7 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: 94f5a474dc502024ea5a12c181a7aec6, type: 3}
   minScore: 1000000
   maxScore: 2147000000
-  BGM: space_sound
+  BGM: BackGround4
   mapChangeEffect: {fileID: 21300000, guid: 8e553229aaf5ed748bc3aac4b3a7c219, type: 3}
   mapChangeEffectTime: 0
   bonus: 777777

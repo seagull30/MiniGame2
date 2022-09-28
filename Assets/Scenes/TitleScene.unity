@@ -2060,7 +2060,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2818,6 +2818,10 @@ MonoBehaviour:
   go_GameBaseUI: {fileID: 1781248865}
   go_AchievementBaseUI: {fileID: 80388458}
   go_OptionBaseUI: {fileID: 1735478458}
+  _effectButtonSprite: {fileID: 1812882952}
+  _BgmButtonSprite: {fileID: 928831003}
+  _onSprite: {fileID: 21300000, guid: 18cd82394784d6146a8bee9b4cafc1fb, type: 3}
+  _offSprite: {fileID: 21300000, guid: d424711ea153f354f992c06674bfefb2, type: 3}
 --- !u!1 &1411505709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3801,7 +3805,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

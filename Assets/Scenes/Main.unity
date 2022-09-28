@@ -497,7 +497,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1790,6 +1790,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248a4e9203f40064490de09b45e6c811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectButtonSprite: {fileID: 0}
+  _BgmButtonSprite: {fileID: 0}
+  _onSprite: {fileID: 0}
+  _offSprite: {fileID: 0}
 --- !u!1 &1360779076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2335,7 +2339,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
