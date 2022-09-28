@@ -17,12 +17,12 @@ MonoBehaviour:
   itemImage: {fileID: -63932126, guid: 39e89a3d60b95fa419c9913f91d4a771, type: 3}
   itemPrefab: {fileID: 4239978667366329321, guid: bba6a96fce9222f4d8a64ed8b7bd205c, type: 3}
   moveSpeed: 5
-  minScore: 25000
-  maxScore: 1000000
+  minScore: 275000
+  maxScore: 2147000000
   effectSound: {fileID: 0}
   effectSoundLoop: 0
-  minXValue: 1
-  maxXValue: 1
+  minXValue: 1080
+  maxXValue: 1080
   minYValue: 1
   maxYValue: 1150
   maxSpawn: 0

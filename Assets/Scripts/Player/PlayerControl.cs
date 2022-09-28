@@ -20,9 +20,13 @@ public class PlayerControl : MonoBehaviour
     private float _maxOverloadLevel = 100f;
 
     [SerializeField]
-    private float _accumulatedOverload = 10f;
+    private float _accumulatedOverload;
     [SerializeField]
-    private float _overloadReduction = -10f;
+    private float _overloadReduction;
+    [SerializeField]
+    private float _repeatingGauge;
+    [SerializeField]
+    private float _cooldownTime;
 
     private bool _isMove = false;
     private Slider _overloadBar;
@@ -46,6 +50,7 @@ public class PlayerControl : MonoBehaviour
 
     private bool _isCeiling = false;
     private bool _isDead;
+    private bool _isStart;
 
     private Animator _animator;
     private static class AnimationID
@@ -74,24 +79,29 @@ public class PlayerControl : MonoBehaviour
         GameManager.Instance.player.playerOnCiling += GameManager.Instance.PlayerOnCiling;
         GameManager.Instance._ispause = false;
         SoundManager.instance.StopAllSE();
+        _isStart = false;
         _isDead = false;
+        Invoke("checkTimeover", 3f);
+
     }
 
 
     private void Update()
     {
         checkInput();
-        if (_isOverload)
-            overload();
-        else
+        if (_isStart)
         {
-            move();
-            falling();
+            if (_isOverload)
+                overload();
+            else
+            {
+                move();
+                falling();
+            }
+            changeColor();
+            //스코어 일시 정지 시켜야 함
+            updateScore();
         }
-        changeColor();
-
-        //스코어 일시 정지 시켜야 함
-        updateScore();
     }
 
     private void checkInput()
@@ -101,35 +111,38 @@ public class PlayerControl : MonoBehaviour
             _isMove = false;
             return;
         }
-        //if (Input.touchCount > 0)
-        //{
-        //    if (Input.GetTouch(0).phase == TouchPhase.Began)
-        //    {
-        //        if (!_isMove)
-        //        {
-        //            if (_isContinuousTouch)
-        //            {
-        //                _overloadBar.value += 15;
-        //                if (_overloadBar.value >= _maxOverloadLevel)
-        //                {
-        //                    _overloadBar.value = _maxOverloadLevel;
-        //                    _isOverload = true;
-        //                }
-        //            }
-        //            _elapsedTime = 0f;
-        //            _isCoroutineRunning = false;
-        //            SoundManager.instance.PlaySE(_flySound);
-        //        }
-        //        _isMove = true;
-        //    }
-        //}
+#if UNITY_EDITOR
+        if (Input.touchCount > 0)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                if (!_isMove)
+                {
+                    if (_isContinuousTouch)
+                    {
+                        _overloadBar.value += 15;
+                        if (_overloadBar.value >= _maxOverloadLevel)
+                        {
+                            _overloadBar.value = _maxOverloadLevel;
+                            _isOverload = true;
+                        }
+                    }
+                    _elapsedTime = 0f;
+                    _isCoroutineRunning = false;
+                    SoundManager.instance.PlaySE(_flySound);
+                }
+                _isMove = true;
+            }
+        }
+#elif UNITY_ANDROID
         if (Input.GetKey(KeyCode.Space))
         {
+            _isStart = true;
             if (!_isMove)
             {
                 if (_isContinuousTouch)
                 {
-                    _overloadBar.value += 15;
+                    _overloadBar.value += _repeatingGauge;
                     if (_overloadBar.value >= _maxOverloadLevel)
                     {
                         _overloadBar.value = _maxOverloadLevel;
@@ -142,6 +155,7 @@ public class PlayerControl : MonoBehaviour
             }
             _isMove = true;
         }
+#endif
         else
         {
             if (_isMove)
@@ -209,7 +223,7 @@ public class PlayerControl : MonoBehaviour
 
         transform.position += new Vector3(0f, _moveDistance, 0f);
 
-        if (!_isCoroutineRunning && _elapsedTime > 1.5f)
+        if (!_isCoroutineRunning && _elapsedTime > _cooldownTime)
         {
             StartCoroutine(changeValue(_overloadReduction));
         }
@@ -291,6 +305,19 @@ public class PlayerControl : MonoBehaviour
         GameManager.Instance.addScore(points);
     }
 
+    private void checkTimeover()
+    {
+        if (!_isStart)
+            DIe();
+    }
+
+    private void DIe()
+    {
+        GameManager.Instance.GameOver();
+        _isDead = true;
+        gameObject.SetActive(false);
+    }
+
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -301,9 +328,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.CompareTag("DeadZone"))
         {
-            GameManager.Instance.GameOver();
-            _isDead = true;
-            gameObject.SetActive(false);
+            DIe();
         }
         if (other.CompareTag("Ceiling"))
         {

@@ -133,7 +133,7 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
-        
+
         if (!Directory.Exists("Assets/Resources/"))
         {
             Directory.CreateDirectory("Assets/Resources/");
@@ -162,11 +162,11 @@ public class DataManager : MonoBehaviour
 
 
         //json 파일이 존재할때 안만듬
-        if(!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT))
+        if (!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT))
         {
             DataUpload("Csv/CSV_obstacle", 1);
         }
-        if(!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND))
+        if (!File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND))
         {
             DataUpload("Csv/CSV_background", 2);
         }
@@ -176,7 +176,7 @@ public class DataManager : MonoBehaviour
         }
 
 
-        
+
     }
 
     void JsonUpload()
@@ -195,17 +195,17 @@ public class DataManager : MonoBehaviour
             saveUser.UserName = "User";
             saveUser.AllCrashTimes = 0;
             saveUser.AllPlayTimeS = 0;
-           /* //임시 데이터 저장
-            saveUser.UserScore.Add(1000);
-            saveUser.UserScore.Add(2000);
-            saveUser.UserScore.Add(3000);
-            saveUser.UserScore.Add(4000);
+            /* //임시 데이터 저장
+             saveUser.UserScore.Add(1000);
+             saveUser.UserScore.Add(2000);
+             saveUser.UserScore.Add(3000);
+             saveUser.UserScore.Add(4000);
 
-            saveUser.UserScoreDate.Add("asdasd");
-            saveUser.UserScoreDate.Add("asdasd");
-            saveUser.UserScoreDate.Add("asdasd");
-            saveUser.UserScoreDate.Add("asdasd");
-            */
+             saveUser.UserScoreDate.Add("asdasd");
+             saveUser.UserScoreDate.Add("asdasd");
+             saveUser.UserScoreDate.Add("asdasd");
+             saveUser.UserScoreDate.Add("asdasd");
+             */
 
             string jsonUser = JsonUtility.ToJson(saveUser);//제이슨화
             File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
@@ -214,7 +214,7 @@ public class DataManager : MonoBehaviour
     }
 
 
-    void DataUpload(string url, int classIndex) 
+    void DataUpload(string url, int classIndex)
     {
         //1. Resources 폴더에 잇는 CSV 파일을 TextAsset으로 로드함
         //TextAsset : 텍스트 파일
@@ -267,21 +267,21 @@ public class DataManager : MonoBehaviour
                         //Debug.Log($"Images/Object{record.ID}.png");
                         Sprite objSprite = Resources.Load<Sprite>($"Images/Object{record.ID}");
                         scObject.itemImage = objSprite; //sprite
-                        
+
                         //프리팹 설정
                         GameObject objPrefab = Resources.Load<GameObject>($"Prefabs/Object{record.ID}");
                         scObject.itemPrefab = objPrefab;
-                        
+
                         scObject.moveSpeed = record.Move_Speed;
                         scObject.minScore = record.Spawn_Min_Score;
                         scObject.maxScore = record.Spawn_Max_Score;
-                        
-/*                        if (record.Effect_Sound == 1)
-                        {
-                            AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
 
-                            scObject.effectSound = objEffectSound;
-                        }*/
+                        /*                        if (record.Effect_Sound == 1)
+                                                {
+                                                    AudioClip objEffectSound = (AudioClip)AssetDatabase.LoadAssetAtPath($"Assets/Images/Object{record.ID}.mp3", typeof(AudioClip));
+
+                                                    scObject.effectSound = objEffectSound;
+                                                }*/
 
                         scObject.effectSoundLoop = record.Effect_Sound_Loop;
                         scObject.minXValue = record.Min_X_Value;
@@ -291,15 +291,16 @@ public class DataManager : MonoBehaviour
                         scObject.maxSpawn = record.Max_Spawn;
                         scObject.minSpawnTime = record.Min_Spawn_Time;
                         scObject.maxSpawnTime = record.Max_Spawn_Time;
-
+#if UNITY_EDITOR
                         AssetDatabase.CreateAsset(scObject, $"Assets/Resources/ScriptableData/Object/ObjectSpawner{record.ID}.asset");
+#endif
                     }
 
                     string json = JsonUtility.ToJson(saveObject);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_OBJECT, json);
 
                 }
-                else if(classIndex == 2)
+                else if (classIndex == 2)
                 {
                     //파싱한 데이터를 class 의 필드로 적용시켜줌
                     //코르틴에 넣을수 있음
@@ -345,8 +346,9 @@ public class DataManager : MonoBehaviour
 
                         scBackGround.BGM = record.BGM;
 
-
+#if UNITY_EDITOR
                         AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Background/Background{record.ID}.asset");
+#endif
                     }
                     string json = JsonUtility.ToJson(saveBackGround);//제이슨화
                     File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_BACKGROUND, json);
@@ -378,9 +380,9 @@ public class DataManager : MonoBehaviour
                         scBackGround.conditinalType = record.Conditional_Type;
                         scBackGround.conditinal = record.Conditional;
                         scBackGround.completion = record.Completion;
-
+#if UNITY_EDITOR
                         AssetDatabase.CreateAsset(scBackGround, $"Assets/Resources/ScriptableData/Achievement/Achievement{record.ID}.asset");
-
+#endif
                     }
 
                     string json = JsonUtility.ToJson(saveAchievement);//제이슨화

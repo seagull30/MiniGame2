@@ -1,6 +1,6 @@
 ID,Name,Map_Image,Map_Change_Min_Score,Map_Change_Max_Score,BGM,Map_Change_Effect,Map_Change_Effect_Time,Bonus
-101,대기권,1,0,7000,BackGround1,1_2,0,10000
-102,성층권,2,7001,12000,BackGround2,2_2,0,15000
-103,중간권,3,12001,30000,BackGround2,3_2,0,30000
-104,열권,4,30001,60000,BackGround4,4_2,0,77777
-105,우주,5,60000,1000000000,BackGround4,0,0,777777
+101,대기권,1,0,50000,atmosphere_sound,1_2,0,10000
+102,성층권,2,50001,125000,stratosphere_sound,2_2,0,15000
+103,중간권,3,125001,375000,mesosphere_sound,3_2,0,30000
+104,열권,4,375001,1000000,thermosphere_sound,4_2,0,77777
+105,우주,5,1000000,2147000000,space_sound,0,0,777777
