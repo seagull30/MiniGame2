@@ -3204,6 +3204,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8116552779144436180, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
+      propertyPath: _moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116552779144436180, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
+      propertyPath: _cooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116552779144436180, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
+      propertyPath: _fallingSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116552779144436180, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
+      propertyPath: _repeatingGauge
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8116552779144436180, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
+      propertyPath: _accumulatedOverload
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8116552779144436181, guid: fb3b51ace6bc75249b7e04b5f9f7a69b, type: 3}
       propertyPath: m_RootOrder
       value: 1
