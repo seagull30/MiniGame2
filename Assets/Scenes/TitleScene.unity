@@ -1103,17 +1103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd751fdf82272824d96eca68d1479b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGMActivated: 1
+  EffectActivated: 1
   effectSounds:
-  - name: object1
+  - name: BestScore
     clip: {fileID: 8300000, guid: 16dad8c87e592054fb147f8a586b90fc, type: 3}
-  - name: object2
+  - name: Button
     clip: {fileID: 8300000, guid: 43d2ed710875b6b4fa51f73e8b0f4cc3, type: 3}
-  - name: object3
+  - name: GameOver
     clip: {fileID: 8300000, guid: ef9de9e7a49f50f47a18c47767feb3c8, type: 3}
-  - name: object4
+  - name: PlayerFly
     clip: {fileID: 8300000, guid: 021a6b361aa655745838149317eeea3c, type: 3}
   bgmSounds:
-  - name: TitleBackground
+  - name: TitleBGM
     clip: {fileID: 8300000, guid: f05207ddae37a1c47b32340a26da1c89, type: 3}
   - name: BackGround1
     clip: {fileID: 8300000, guid: 0d9b2bd1635bcb047b46f5b6f0d29c9c, type: 3}
@@ -4352,6 +4354,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2142172114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42fa1658e50860d4c89624ffe0d054ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 3129d9b9b96dd9a4ab87ec4f9bee1f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

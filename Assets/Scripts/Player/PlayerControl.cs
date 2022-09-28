@@ -54,6 +54,8 @@ public class PlayerControl : MonoBehaviour
         public static readonly int ISMOVE = Animator.StringToHash("IsMove");
     }
 
+    private readonly string _flySound = "PlayerFly";
+
 
     private void Awake()
     {
@@ -71,6 +73,7 @@ public class PlayerControl : MonoBehaviour
         GameManager.Instance.player = gameObject.GetComponent<PlayerControl>();
         GameManager.Instance.player.playerOnCiling += GameManager.Instance.PlayerOnCiling;
         GameManager.Instance._ispause = false;
+        SoundManager.instance.StopAllSE();
         _isDead = false;
     }
 
@@ -98,6 +101,28 @@ public class PlayerControl : MonoBehaviour
             _isMove = false;
             return;
         }
+        //if (Input.touchCount > 0)
+        //{
+        //    if (Input.GetTouch(0).phase == TouchPhase.Began)
+        //    {
+        //        if (!_isMove)
+        //        {
+        //            if (_isContinuousTouch)
+        //            {
+        //                _overloadBar.value += 15;
+        //                if (_overloadBar.value >= _maxOverloadLevel)
+        //                {
+        //                    _overloadBar.value = _maxOverloadLevel;
+        //                    _isOverload = true;
+        //                }
+        //            }
+        //            _elapsedTime = 0f;
+        //            _isCoroutineRunning = false;
+        //            SoundManager.instance.PlaySE(_flySound);
+        //        }
+        //        _isMove = true;
+        //    }
+        //}
         if (Input.GetKey(KeyCode.Space))
         {
             if (!_isMove)
@@ -113,6 +138,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 _elapsedTime = 0f;
                 _isCoroutineRunning = false;
+                SoundManager.instance.PlaySE(_flySound);
             }
             _isMove = true;
         }
@@ -130,6 +156,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 _elapsedTime = 0f;
                 _isCoroutineRunning = false;
+                SoundManager.instance.StopSE(_flySound);
             }
             _isMove = false;
         }

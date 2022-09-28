@@ -19,8 +19,13 @@ public class TitleMenu : MonoBehaviour
     private GameObject go_OptionBaseUI; //옵션 패널
 
     private readonly string _effectSound = "Button";
+    private readonly string _bgmName= "TitleBGM";
 
 
+    private void Start()
+    {
+        SoundManager.instance.PlayBGM(_bgmName);
+    }
     public void CallScoreMenu()
     {
         go_ScoreBaseUI.SetActive(true);

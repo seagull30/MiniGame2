@@ -109,6 +109,8 @@ public class SaveUser
     public List<int> UserScore = new List<int>();
     public List<string> UserScoreDate = new List<string>();
     public List<int> UserAchievement = new List<int>();
+    public int AllPlayTimeS;
+    public int AllCrashTimes;
 }
 
 
@@ -191,6 +193,8 @@ public class DataManager : MonoBehaviour
 
             //유저 정보 저장
             saveUser.UserName = "User";
+            saveUser.AllCrashTimes = 0;
+            saveUser.AllPlayTimeS = 0;
            /* //임시 데이터 저장
             saveUser.UserScore.Add(1000);
             saveUser.UserScore.Add(2000);

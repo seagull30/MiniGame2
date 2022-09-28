@@ -22,6 +22,10 @@ public class BackGroundManager : MonoBehaviour
     public static BackGroundItem[] backgroundData;
     private int backgroundDataIndex;
 
+    public static int backgroundID;
+
+
+
     private void Awake()
     {
         _childsCount = transform.childCount;
@@ -51,6 +55,8 @@ public class BackGroundManager : MonoBehaviour
         _downPosY = -_yScreenHalfSize * 2;
         //임시적용 김영훈 2022.9.27
         SoundManager.instance.PlayBGM(backgroundData[backgroundDataIndex].BGM);
+        //아이디를 업적 달성 조건에 맞는지 확인이 필요
+        backgroundID = backgroundData[backgroundDataIndex].id;
     }
     public void OnUPMove(float distence)
     {
@@ -82,6 +88,7 @@ public class BackGroundManager : MonoBehaviour
 
             ++backgroundDataIndex;
             SoundManager.instance.PlayBGM(backgroundData[backgroundDataIndex].BGM);
+            backgroundID = backgroundData[backgroundDataIndex].id;
             return;
         }
         if (GameManager.Instance.Score > backgroundData[backgroundDataIndex].minScore)

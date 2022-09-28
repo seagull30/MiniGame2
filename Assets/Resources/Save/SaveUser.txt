@@ -1,1 +1,1 @@
-{"UserName":"User","UserScore":[],"UserScoreDate":[],"UserAchievement":[]}
+{"UserName":"User","UserScore":[10989],"UserScoreDate":[],"UserAchievement":[],"AllPlayTimeS":2,"AllCrashTimes":1}

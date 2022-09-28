@@ -22,6 +22,7 @@ public class GameManager : SingletonBehaviour<GameManager>
 
     public bool _ispause = false;
 
+    private readonly string _GameOverSound = "GameOver";
     public int Score
     {
         get
@@ -62,6 +63,8 @@ public class GameManager : SingletonBehaviour<GameManager>
     }
     public void GameOver()
     {
+        SoundManager.instance.StopAllSE();
+        SoundManager.instance.PlaySE(_GameOverSound);
         OnGameEnd.Invoke(Score, stageScore);
     }
 }

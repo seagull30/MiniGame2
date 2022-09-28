@@ -43,7 +43,7 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         playSoundName = new string[audioSourceEffects.Length];
-        PlayBGM("TitleBackground");
+        //PlayBGM("TitleBackground");
         /*        PlaySE("object1");
                 PlaySE("object2");
                 PlaySE("object3");*/

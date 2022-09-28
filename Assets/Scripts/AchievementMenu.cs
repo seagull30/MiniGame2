@@ -47,13 +47,7 @@ public class AchievementMenu : MonoBehaviour
                 {
                     newObj.gameObject.SetActive(false);
                 }
-
             }
-
-
-
-            
-
         }
     }
 }
