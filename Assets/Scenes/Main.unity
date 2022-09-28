@@ -1790,10 +1790,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248a4e9203f40064490de09b45e6c811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectButtonSprite: {fileID: 0}
-  _BgmButtonSprite: {fileID: 0}
-  _onSprite: {fileID: 0}
-  _offSprite: {fileID: 0}
+  _effectButtonSprite: {fileID: 1691485467}
+  _BgmButtonSprite: {fileID: 84732501}
+  _onSprite: {fileID: 21300000, guid: 6548552222216e04cb057cfcc04b1b6a, type: 3}
+  _offSprite: {fileID: 21300000, guid: 02ca8e8e700c49a4c9896a027b96debb, type: 3}
 --- !u!1 &1360779076
 GameObject:
   m_ObjectHideFlags: 0

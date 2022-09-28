@@ -109,6 +109,7 @@ public class PlayerControl : MonoBehaviour
         if (_isOverload)
         {
             _isMove = false;
+            SoundManager.instance.StopAllSE();
             return;
         }
 #if UNITY_ANDROID
@@ -170,7 +171,7 @@ public class PlayerControl : MonoBehaviour
                 }
                 _elapsedTime = 0f;
                 _isCoroutineRunning = false;
-                SoundManager.instance.StopSE(_flySound);
+                SoundManager.instance.StopAllSE();
             }
             _isMove = false;
         }
@@ -275,16 +276,14 @@ public class PlayerControl : MonoBehaviour
                 SoundManager.instance.StopAllSE();
                 _animator.SetTrigger(AnimationID.OVERLOAD);
                 _animator.SetBool(AnimationID.ISMOVE, false);
-
-                break;
+                yield break;
             }
             if (_overloadBar.value <= 0f)
             {
                 _overloadBar.value = 0f;
                 _isOverload = false;
                 _isCoroutineRunning = false;
-
-                break;
+                yield break;
             }
             yield return new WaitForSeconds(0.5f);
         }
