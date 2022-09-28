@@ -80,6 +80,7 @@ public class SoundManager : MonoBehaviour
             {
                 audioSourceBGM.clip = bgmSounds[i].clip;
                 audioSourceBGM.Play();
+                audioSourceBGM.loop = true;
                 return;
             }
         }
