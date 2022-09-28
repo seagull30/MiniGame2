@@ -111,7 +111,7 @@ public class PlayerControl : MonoBehaviour
             _isMove = false;
             return;
         }
-#if UNITY_EDITOR
+#if UNITY_ANDROID
         if (Input.touchCount > 0)
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
@@ -134,7 +134,7 @@ public class PlayerControl : MonoBehaviour
                 _isMove = true;
             }
         }
-#elif UNITY_ANDROID
+#elif UNITY_EDITOR
         if (Input.GetKey(KeyCode.Space))
         {
             _isStart = true;
@@ -155,7 +155,7 @@ public class PlayerControl : MonoBehaviour
             }
             _isMove = true;
         }
-#endif
+# endif 
         else
         {
             if (_isMove)
