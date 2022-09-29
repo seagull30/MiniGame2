@@ -14,13 +14,13 @@ public class GameOverUI : MonoBehaviour
     public SaveUser saveUser = new SaveUser();
     public SaveDataAchievement _saveDataAchievement = new SaveDataAchievement();
 
-    private string SAVE_DATA_DIRECTORY = "Assets/Resources/Save"; //저장할 폴더 경로
+    private string SAVE_DATA_DIRECTORY = "/Save"; //저장할 폴더 경로
     private string SAVE_USER = "/SaveUser.txt"; //유저 파일
     private string SAVE_FILENAME_ACHIEVEMENT = "/SaveFileAchievement.txt"; //파일 이름
 
 
     private float playTimer = 0f;
-    
+
     private void Update()
     {
         playTimer += Time.deltaTime;
@@ -82,33 +82,33 @@ public class GameOverUI : MonoBehaviour
     public void achievementUpdateData(int score)
     {
 
-        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT))
+        if (File.Exists(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT))
         {
             //전체 읽어 오기
-            string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT);
+            string loadJson = File.ReadAllText(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT);
             _saveDataAchievement = JsonUtility.FromJson<SaveDataAchievement>(loadJson);
 
             //전체 레코드 불러오기
             for (int i = 0; i < _saveDataAchievement.Name.Count; i++)
             {
                 //해당 컬럼이 false일때 실행
-                if(_saveDataAchievement.Completion[i] == false)
+                if (_saveDataAchievement.Completion[i] == false)
                 {
 
                     //조건 1일때
-                    if(_saveDataAchievement.Conditional_Type[i] == 1)
+                    if (_saveDataAchievement.Conditional_Type[i] == 1)
                     {
                         //점수가 레코드 값보다 넘었으면 업적 달성
-                        if(_saveDataAchievement.Conditional[i] > score)
+                        if (_saveDataAchievement.Conditional[i] > score)
                         {
                             _saveDataAchievement.Completion[i] = true;
                         }
                     }
                     //조건 2일때
-                    else if(_saveDataAchievement.Conditional_Type[i] == 2)
+                    else if (_saveDataAchievement.Conditional_Type[i] == 2)
                     {
                         //아이디가 레코드보다 높을때
-                        if(BackGroundManager.backgroundID >= _saveDataAchievement.Conditional[i])
+                        if (BackGroundManager.backgroundID >= _saveDataAchievement.Conditional[i])
                         {
                             _saveDataAchievement.Completion[i] = true;
                         }
@@ -118,7 +118,7 @@ public class GameOverUI : MonoBehaviour
                     {
                         int allcrashTime = saveUser.AllCrashTimes;
                         //충돌 횟수가 100회 이상일때
-                        if(allcrashTime >= _saveDataAchievement.Conditional[i])
+                        if (allcrashTime >= _saveDataAchievement.Conditional[i])
                         {
                             _saveDataAchievement.Completion[i] = true;
                         }
@@ -128,7 +128,7 @@ public class GameOverUI : MonoBehaviour
                     {
                         int allplayTime = saveUser.AllPlayTimeS;
                         //플레이 시간이 초단위 이상일때
-                        if(allplayTime >= _saveDataAchievement.Conditional[i])
+                        if (allplayTime >= _saveDataAchievement.Conditional[i])
                         {
                             _saveDataAchievement.Completion[i] = true;
                         }
@@ -138,7 +138,7 @@ public class GameOverUI : MonoBehaviour
             }
 
             string json = JsonUtility.ToJson(_saveDataAchievement);//제이슨화
-            File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT, json);
+            File.WriteAllText(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_FILENAME_ACHIEVEMENT, json);
 
         }
 
@@ -149,10 +149,10 @@ public class GameOverUI : MonoBehaviour
 
     public void updateData(int score)
     {
-        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_USER))
+        if (File.Exists(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_USER))
         {
             //전체 읽어 오기
-            string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_USER);
+            string loadJson = File.ReadAllText(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_USER);
             saveUser = JsonUtility.FromJson<SaveUser>(loadJson);
 
             //새로운 레코드 추가후 다시 저장시키기
@@ -168,7 +168,7 @@ public class GameOverUI : MonoBehaviour
             saveUser.AllCrashTimes = allcrashTime + 1;
 
             string jsonUser = JsonUtility.ToJson(saveUser);//제이슨화
-            File.WriteAllText(SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
+            File.WriteAllText(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_USER, jsonUser);
 
 
             Debug.Log("로드완료");

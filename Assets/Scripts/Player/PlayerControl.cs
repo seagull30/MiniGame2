@@ -117,6 +117,8 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
+                _isStart = true;
+
                 if (!_isMove)
                 {
                     if (_isContinuousTouch)

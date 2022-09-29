@@ -1,1 +1,1 @@
-{"UserName":"User","UserScore":[20975,18741,13064,12920,11350,11310,11903,10000,14603],"UserScoreDate":[],"UserAchievement":[],"AllPlayTimeS":82,"AllCrashTimes":9}
+{"UserName":"User","UserScore":[],"UserScoreDate":[],"UserAchievement":[],"AllPlayTimeS":0,"AllCrashTimes":0}
