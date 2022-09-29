@@ -7,7 +7,7 @@ using TMPro;
 
 public class SaveAndLoad : MonoBehaviour
 {
-    
+
     public SaveUser saveUser = new SaveUser();
 
     [SerializeField]
@@ -20,20 +20,20 @@ public class SaveAndLoad : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SAVE_DATA_DIRECTORY = Application.dataPath + "/Save/";
+        /*        SAVE_DATA_DIRECTORY = Application.dataPath + "/Save/";
 
-        if (!Directory.Exists(SAVE_DATA_DIRECTORY)) //해당 경로가 존재하지 않는다면
-        {
-            Directory.CreateDirectory(SAVE_DATA_DIRECTORY);//폴더 생성(경로 생성)
-        }
+                if (!Directory.Exists(SAVE_DATA_DIRECTORY)) //해당 경로가 존재하지 않는다면
+                {
+                    Directory.CreateDirectory(SAVE_DATA_DIRECTORY);//폴더 생성(경로 생성)
+                }
 
-        LoadDataUser();
+                LoadDataUser();*/
     }
 
     //유저 정보 저장
     public void SaveUserData()
     {
-        
+
     }
 
 
@@ -58,7 +58,7 @@ public class SaveAndLoad : MonoBehaviour
     //유저 정보 기반으로 오브젝트 풀링하기
     public void LoadDataUser()
     {
-       
+
     }
 
 

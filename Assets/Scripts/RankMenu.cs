@@ -14,7 +14,7 @@ public class RankMenu : MonoBehaviour
     private GameObject poolingObjectPrefab;
 
 
-    private string SAVE_DATA_DIRECTORY = "Assets/Resources/Save"; //저장할 폴더 경로
+    private string SAVE_DATA_DIRECTORY = "/Save"; //저장할 폴더 경로
     private string SAVE_USER = "/SaveUser.txt"; //유저 파일
 
     // Start is called before the first frame update
@@ -25,10 +25,10 @@ public class RankMenu : MonoBehaviour
 
     public void LoadDataUser()
     {
-        if (File.Exists(SAVE_DATA_DIRECTORY + SAVE_USER))
+        if (File.Exists(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_USER))
         {
             //전체 읽어 오기
-            string loadJson = File.ReadAllText(SAVE_DATA_DIRECTORY + SAVE_USER);
+            string loadJson = File.ReadAllText(Application.persistentDataPath + SAVE_DATA_DIRECTORY + SAVE_USER);
             saveUser = JsonUtility.FromJson<SaveUser>(loadJson);
 
             //상위 10위권 점수 불러오기
@@ -42,9 +42,9 @@ public class RankMenu : MonoBehaviour
             scorelist.Sort();
 
             //순위 10위권 보이게 하기
-            for(int i = 0; i < scorelist.Count; i++)
+            for (int i = 0; i < scorelist.Count; i++)
             {
-                if(i >= 10)
+                if (i >= 10)
                 {
                     break;
                 }
